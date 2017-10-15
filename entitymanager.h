@@ -54,6 +54,8 @@ public:
 
 	void createcapicon(glm::vec3 maxscale, bool ally, std::shared_ptr<ACC::entity> player);
 
+	void createsound(std::shared_ptr<soundComponet> soundcomp);
+
 
 	entitymanager();
 

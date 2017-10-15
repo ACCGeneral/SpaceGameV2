@@ -21,7 +21,7 @@ namespace enttypes
 		Skybox,
 		Spotlight,
 		AllyCapIcon,
-		EnemyCapIcon
-
+		EnemyCapIcon,
+		Sound
 	};
 }

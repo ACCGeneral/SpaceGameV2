@@ -186,27 +186,22 @@ void Resourecmanager::soundsinit()
 {
 	sound lazorsound;
 	lazorsound.setup("Sounds//LazorFire.ogg");
-	lazorsound.changevol(0.1f);
 	mysoundholder.addsound(lazorsound, "lazorsound");
 
 	sound bombsound;
 	bombsound.setup("Sounds//BombFire.ogg");
-	bombsound.changevol(0.1f);
 	mysoundholder.addsound(bombsound, "bombsound");
 
 	sound collisionsound;
 	collisionsound.setup("Sounds//Collision.ogg");
-	collisionsound.changevol(0.1f);
 	mysoundholder.addsound(collisionsound, "Collision");
 
 	sound explosion;
 	explosion.setup("Sounds//Explotion.ogg");
-	explosion.changevol(0.1f);
 	mysoundholder.addsound(explosion, "explosion");
 
 	sound bulletHit;
 	bulletHit.setup("Sounds//BulletHit.ogg");
-	bulletHit.changevol(0.4f);
 	mysoundholder.addsound(bulletHit, "Bulletcol");
 
 	sound mainmusic;

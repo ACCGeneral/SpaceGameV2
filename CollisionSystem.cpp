@@ -112,8 +112,12 @@ void CollisionSystem::dealwithcols()
 				enttwovel->velocity = glm::vec3(0, 0, 0);
 				enttwovel->speed = 0;
 			}
-			physicssound.setpos(collisionpos);
-			physicssound.playsound();
+
+			std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+			newsound->mysound = physicssound;
+			newsound->mytype = newsound->onetime;
+			newsound->position = collisionpos;
+			myworld->returnmanager()->createsound(newsound);
 		}
 
 
@@ -138,16 +142,17 @@ void CollisionSystem::healthanddamage(std::shared_ptr<ACC::entity> entone, std::
 	std::shared_ptr<damagedelt> entonedamage = entone->getcomponent<damagedelt>();
 	std::shared_ptr<damagedelt> enttwodamage = enttwo->getcomponent<damagedelt>();
 
+	sound hitsound;
+	glm::vec3 hitpos;
+
 	if (enthealthone != NULL)
 	{
 		if (enthealthone->hitdelete.first == true)
 		{
 			enthealthone->hitdelete.second = true;
-
 			std::shared_ptr<transposecomponent> entonetrans = entone->getcomponent<transposecomponent>();
-			entonedamage->damagesound.setpos(entonetrans->position);
-			entonedamage->damagesound.playsound();
-			
+			hitpos = entonetrans->position;
+			hitsound = entonedamage->damagesound;
 		}
 		if (enttwodamage != NULL)
 		{
@@ -160,19 +165,21 @@ void CollisionSystem::healthanddamage(std::shared_ptr<ACC::entity> entone, std::
 		if (enthealthtwo->hitdelete.first == true)
 		{
 			enthealthtwo->hitdelete.second = true;
-
 			std::shared_ptr<transposecomponent> enttwotrans = enttwo->getcomponent<transposecomponent>();
-			enttwodamage->damagesound.setpos(enttwotrans->position);
-			enttwodamage->damagesound.playsound();
-			
+			hitpos = enttwotrans->position;
+			hitsound = enttwodamage->damagesound;
 		}
-
 		if (entonedamage != NULL)
 		{
 			enthealthtwo->health -= entonedamage->damage;
 		}
 	}
 
+	std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+	newsound->mysound = hitsound;
+	newsound->mytype = newsound->onetime;
+	newsound->position = hitpos;
+	myworld->returnmanager()->createsound(newsound);
 }
 
 void CollisionSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)

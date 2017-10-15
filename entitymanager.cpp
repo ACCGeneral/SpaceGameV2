@@ -1355,6 +1355,17 @@ void entitymanager::createcapicon(glm::vec3 maxscale, bool ally, std::shared_ptr
 	
 }
 
+void entitymanager::createsound(std::shared_ptr<soundComponet> soundcomp)
+{
+	std::shared_ptr<ACC::entity> sound = std::make_shared<ACC::entity>(IDs.getID(), enttypes::Sound);
+	soundcomp->mysound.sourcesetup();
+	soundcomp->mysound.setpos(soundcomp->position);
+	sound->addcomponent(soundcomp);
+
+	entities[sound->returnID()] = sound;
+	tooadd.push_back(sound);
+}
+
 
 void entitymanager::cleartodelete() //delete all entities we no longer need 
 {

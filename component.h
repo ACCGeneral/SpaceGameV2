@@ -504,4 +504,17 @@ public:
 
 };
 
+class soundComponet : public ACC::component
+{
 
+public:
+
+	static const int TypeID = 26;
+	int GetType() const { return TypeID; };
+
+	glm::vec3 position;
+	sound mysound;
+	enum soundtype { repeate, onetime};
+	soundtype mytype;
+
+};

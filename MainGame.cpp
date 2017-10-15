@@ -1,6 +1,23 @@
 #include "MainGame.h"
 #include "maincamera.h"
 #include "OctTree.h"
+#include "SoundSystem.h"
+#include "AnimationSystem.h"
+#include "modelmatrixsystem.h"
+#include "RenderSystem.h"
+#include "PlayerSystem.h"
+#include "FireSystem.h"
+#include "BoxIconSystem.h"
+#include "CollisionSystem.h"
+#include "BoxIconSystem.h"
+#include "AIsystem.h"
+#include "HealthDisplaySystem.h"
+#include "Trackingboxsystem.h"
+#include "TargetingSystem.h"
+#include "PhysicsSystem.h"
+#include "lifetimesystem.h"
+#include "HealthCheckSystem.h"
+#include "TargetingSystem.h"
 
 MainGame::MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman) : scene(Sman)
 {
@@ -45,6 +62,8 @@ void MainGame::init()
 
 	std::shared_ptr<RenderSystem> myrendersystem = std::make_shared<RenderSystem>(myworld);
 	MyManager->setrender(myrendersystem);
+	std::shared_ptr<SoundSystem> soundSystem = std::make_shared<SoundSystem>(myworld,0.2f);
+	MyManager->addsystem(soundSystem);
 	std::shared_ptr<PlayerSystem> playersys = std::make_shared<PlayerSystem>(myworld);
 	MyManager->addsystem(playersys);
 	std::shared_ptr<AIsystem> aisys = std::make_shared<AIsystem>(myworld);
@@ -75,15 +94,16 @@ void MainGame::init()
 	MyManager->updatesystements();
 	myworld->getmaincam()->setProjection(glm::perspective(glm::radians(52.0f), (float)1280.0f / (float)720.0f, 0.1f, 10000.0f));
 
-	mainsound = Resourecmanager::instance().getsound("MainMusic");
-	mainsound.setpos(glm::vec3(0, 0, 0));
-	mainsound.playsound();
+	std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+	newsound->mysound = Resourecmanager::instance().getsound("MainMusic");
+	newsound->mytype = newsound->repeate;
+	newsound->position = glm::vec3(0, 0, 0);
+	myworld->returnmanager()->createsound(newsound);
 
 }
 
 void MainGame::update(float dt, bool & go)
 {
-	mainsound.repeatcheck();
 	myspawnsystem.createents(myworld->returnmanager());
 
 	float tempdt = dt;

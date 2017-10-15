@@ -315,6 +315,9 @@
     <ClInclude Include="movementcontroller.h">
       <Filter>Header Files\AI</Filter>
     </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common.cpp">
@@ -508,6 +511,9 @@
     </ClCompile>
     <ClCompile Include="movementcontroller.cpp">
       <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

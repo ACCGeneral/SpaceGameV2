@@ -21,8 +21,9 @@ public:
 	void playsound();
 	void setpos(glm::vec3 pos);
 	void setup(std::string filename);
-	void repeatcheck();
+	void sourcesetup();
 	void stopsounds();
+	bool isStoped();
 
 	void cleanup();
 

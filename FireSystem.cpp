@@ -54,8 +54,11 @@ void FireSystem::update(float & dt, bool & go)
 						}
 						myguns->fire = false;
 
-						myguns->firesound.setpos(projectile.pos);
-						myguns->firesound.playsound();
+						std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+						newsound->mysound = myguns->firesound;
+						newsound->mytype = newsound->onetime;
+						newsound->position = projectile.pos;
+						myworld->returnmanager()->createsound(newsound);
 
 					}
 					myguns->currettime = 0;

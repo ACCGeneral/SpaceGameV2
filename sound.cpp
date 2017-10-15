@@ -18,7 +18,6 @@ void sound::setpos(glm::vec3 pos)
 void sound::setup(std::string filename)
 {
 	alGenBuffers(1, &bufferID);
-	alGenSources(1, &sourceID);
 
 	ALenum format = 0;
 	ALsizei freq = 0;
@@ -28,10 +27,23 @@ void sound::setup(std::string filename)
 
 	alBufferData(bufferID, format, &bufferData[0],
 		static_cast<ALsizei>(bufferData.size()), freq);
+
+}
+
+void sound::sourcesetup()
+{
+	alGenSources(1, &sourceID);
 	alSourcei(sourceID, AL_BUFFER, bufferID);
 }
 
-void sound::repeatcheck()
+
+void sound::stopsounds()
+{
+	alSourceStop(sourceID);
+
+}
+
+bool sound::isStoped()
 {
 	ALint state = 0;
 
@@ -39,15 +51,12 @@ void sound::repeatcheck()
 
 	if (state == AL_STOPPED)
 	{
-		alSourcePlay(sourceID);
+		return true;
 	}
-
-}
-
-void sound::stopsounds()
-{
-	alSourceStop(sourceID);
-
+	else
+	{
+		return false;
+	}
 }
 
 void sound::cleanup()
