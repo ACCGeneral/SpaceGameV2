@@ -113,6 +113,8 @@ void entitymanager::createplayer(glm::vec3 pos)
 	health->maxhp = 100;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	player->addcomponent(health);
 
 	std::shared_ptr<playercomp> playercom = std::make_shared<playercomp>();
@@ -211,6 +213,8 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	health->maxhp = 100;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	enemyfighter->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -313,6 +317,8 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	health->maxhp = 150;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	enemeybomber->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -436,6 +442,8 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 	health->maxhp = 10000;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	EnemyCapital->addcomponent(health);
 
 	std::shared_ptr<teamcomponent> teamcomp = std::make_shared<teamcomponent>();
@@ -509,6 +517,8 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	health->maxhp = 100;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	AllyFighter->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -611,6 +621,8 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	health->maxhp = 150;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	allybomber->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -734,6 +746,8 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 	health->maxhp = 10000;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	AllyCapital->addcomponent(health);
 
 	std::shared_ptr<teamcomponent> teamcomp = std::make_shared<teamcomponent>();
@@ -814,6 +828,8 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	health->maxhp = 500;
 	health->hitdelete.first = false;
 	health->hitdelete.second = false;
+	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
+	health->deathsound.second = true;
 	turretEntity->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -850,6 +866,10 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	}
 	turretEntity->addcomponent(turr);
 
+	std::shared_ptr<damagedelt> damagedeal = std::make_shared<damagedelt>();
+	damagedeal->damage = 70;
+	damagedeal->maxdamage = 70;
+	turretEntity->addcomponent(damagedeal);
 
 	std::shared_ptr<teamcomponent> teamcomp = std::make_shared<teamcomponent>();
 	teamcomp->ally = team;

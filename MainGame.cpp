@@ -38,20 +38,20 @@ void MainGame::init()
 	allycapship = myworld->returnmanager()->createAllyCapital(glm::vec3(500, 0, 0));
 	
 	myworld->returnmanager()->createplayer(myspawnsystem.getallyspawn());
+	/*myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
 	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
-	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
-	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
+	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());*/
+	/*myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
 	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
-	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
-	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
+	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());*/
 
+	/*myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
 	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
 	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
-	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
-	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
+	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());*/
+	/*myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
 	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
-	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
-	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
+	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());*/
 	
 
 	std::shared_ptr<dirlight> themainlight = std::make_shared<dirlight>();

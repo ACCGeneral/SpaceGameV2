@@ -144,6 +144,7 @@ void CollisionSystem::healthanddamage(std::shared_ptr<ACC::entity> entone, std::
 
 	sound hitsound;
 	glm::vec3 hitpos;
+	bool soundtoplay = false;
 
 	if (enthealthone != NULL)
 	{
@@ -153,6 +154,7 @@ void CollisionSystem::healthanddamage(std::shared_ptr<ACC::entity> entone, std::
 			std::shared_ptr<transposecomponent> entonetrans = entone->getcomponent<transposecomponent>();
 			hitpos = entonetrans->position;
 			hitsound = entonedamage->damagesound;
+			soundtoplay = true;
 		}
 		if (enttwodamage != NULL)
 		{
@@ -168,6 +170,7 @@ void CollisionSystem::healthanddamage(std::shared_ptr<ACC::entity> entone, std::
 			std::shared_ptr<transposecomponent> enttwotrans = enttwo->getcomponent<transposecomponent>();
 			hitpos = enttwotrans->position;
 			hitsound = enttwodamage->damagesound;
+			soundtoplay = true;
 		}
 		if (entonedamage != NULL)
 		{
@@ -175,11 +178,15 @@ void CollisionSystem::healthanddamage(std::shared_ptr<ACC::entity> entone, std::
 		}
 	}
 
-	std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
-	newsound->mysound = hitsound;
-	newsound->mytype = newsound->onetime;
-	newsound->position = hitpos;
-	myworld->returnmanager()->createsound(newsound);
+	if (soundtoplay)
+	{
+		std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+		newsound->mysound = hitsound;
+		newsound->mytype = newsound->onetime;
+		newsound->position = hitpos;
+		myworld->returnmanager()->createsound(newsound);
+	}
+	
 }
 
 void CollisionSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)

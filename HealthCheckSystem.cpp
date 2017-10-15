@@ -33,6 +33,16 @@ void HealthCheckSystem::update(float & dt, bool & go)
 			myworld->returnmanager()->addtodeletelist(num);
 			root->removethis(num->returnID(), removefrom);
 
+			if (healthobjects->deathsound.second)
+			{
+				std::shared_ptr<transposecomponent> mytrans = num->getcomponent<transposecomponent>();
+				std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+				newsound->mysound = healthobjects->deathsound.first;
+				newsound->mytype = newsound->onetime;
+				newsound->position = mytrans->position;
+				myworld->returnmanager()->createsound(newsound);
+			}
+
 			std::shared_ptr<thingsiown> mythings = num->getcomponent<thingsiown>();
 			if (mythings != NULL)
 			{

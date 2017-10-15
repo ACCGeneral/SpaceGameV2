@@ -114,11 +114,18 @@ class healthcomponent : public ACC::component
 
 public:
 
+	healthcomponent()
+	{
+		deathsound.second = false;
+	}
+
 	static const int TypeID = 5;
 
 	float health;
 
 	float maxhp;
+
+	std::pair<sound,bool> deathsound;
 
 	std::pair<bool,bool> hitdelete;
 
