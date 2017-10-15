@@ -1,0 +1,8 @@
+#version 430 core
+
+out vec3 fragColour;
+
+void main()
+{
+	fragColour = vec3(1,1,0);
+};

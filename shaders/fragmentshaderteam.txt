@@ -1,0 +1,33 @@
+#version 430 core
+
+in vec2 TexCoords;
+
+out vec4 colour;
+
+uniform sampler2D texture_diffuse1;
+
+uniform bool team;
+uniform bool target;
+
+void main()
+{  
+    vec4 alphacheck = vec4(texture(texture_diffuse1, TexCoords));
+    if(alphacheck.a < 0.1)
+    {
+       discard;
+    }
+    
+    if(team == false && target == false)
+    {
+       colour = vec4(1,0,0,alphacheck.a);
+    }
+    else if(target == true)
+    {
+       colour = vec4(1,1,0,alphacheck.a);
+    }
+    else
+    {
+       colour = alphacheck;
+    }
+    
+}

@@ -1,0 +1,129 @@
+#version 430 core
+
+in vec2 texCoords;
+in vec3 normal;
+in vec3 FragPos;
+uniform sampler2D texture_diffuse1;
+uniform vec3 camerapos;
+uniform float pointlights;
+uniform float spotlights;
+uniform float shine;
+uniform float strength;
+
+struct dirLight 
+{
+vec3 direction;
+vec3 ambient;
+vec3 lightcolour;
+};
+uniform dirLight myDirLights[1];
+
+
+struct spotlight
+{
+  vec3 position;
+  vec3 direction;
+  float radius;
+  float outerrad;
+
+  float constant;
+  float linear;
+  float quadratic;
+
+  vec3 ambient;
+  vec3 lightcolour;
+};
+//uniform spotlight mySpotLights[1];
+
+vec3 AllSpotLights(spotlight light,vec3 campos, vec3 Fpos);
+vec3 AllDirectionalLight(dirLight light, vec3 campos, vec3 Fpos);
+
+
+bool blinn;
+out vec4 color;
+
+void main()
+{
+    blinn = true;
+    vec3 tobecolour = vec3(0,0,0);
+    
+    tobecolour = AllDirectionalLight(myDirLights[0],camerapos,FragPos);
+   //tobecolour += AllSpotLights(mySpotLights[0],camerapos,FragPos);
+    color = vec4(tobecolour,1.0);
+
+}	
+
+vec3 AllDirectionalLight(dirLight light, vec3 campos, vec3 Fpos)
+{
+    vec3 memes = vec3(texture(texture_diffuse1, texCoords));
+    vec3 ambient = light.ambient * memes;
+
+    vec3 norm = normalize(normal);
+    vec3 lightdir = normalize(-light.direction);
+    float diff = max(dot(norm,lightdir), 0.0);
+    vec3 diffuse = (light.lightcolour * diff) * memes;
+
+    vec3 camdir = normalize(camerapos - Fpos);
+    vec3 reflectDir = reflect(-light.direction, norm);
+    vec3 halfwayvec = normalize(lightdir + camdir);
+    float spec;
+    if(blinn)
+	{
+	    spec = max(dot(norm, halfwayvec), 0.0);
+	    spec = pow(spec, shine);
+	}
+    else
+	{	
+	    spec = max(dot(camdir, reflectDir), 0.0);
+            spec = pow(spec, shine);
+      }
+    
+  vec3 specular = (light.lightcolour * spec * strength) * memes;
+
+  return ambient + diffuse + specular;
+
+}
+
+vec3 AllSpotLights(spotlight light, vec3 campos, vec3 Fpos)
+{
+   vec3 memes = vec3(texture(texture_diffuse1, texCoords));
+
+      vec3 ambient = light.ambient * memes;
+	vec3 lightdir = normalize(light.position - Fpos);
+   	float diff = max(dot(normal,lightdir), 0.0);
+    	vec3 diffuse = (light.lightcolour * diff) * memes;
+
+    	vec3 camdir = normalize(camerapos - Fpos);
+    	vec3 reflectDir = reflect(light.direction, normal);
+    	vec3 halfwayvec = normalize(lightdir + camdir);
+    	float spec;
+    	if(blinn)
+	{
+	    spec = pow(max(dot(normal, halfwayvec), 0.0), shine);
+	}
+    	else
+	{	
+	    spec = pow(max(dot(camdir, reflectDir), 0.0), shine);
+        }
+
+    	vec3 specular = (light.lightcolour * spec * strength) * memes;
+
+	float theta = dot(lightdir, normalize(-light.direction));
+	float epsilon = (light.radius - light.outerrad);
+	float intensity = clamp((theta - light.outerrad) / epsilon, 0.0, 1.0);
+	ambient *= intensity;
+	diffuse *= intensity;
+	specular *= intensity;
+
+	float dist = length(light.position - Fpos);
+	float attenuation;
+
+        attenuation = 1.0f / (light.constant + light.linear * dist + light.quadratic * (dist * dist));
+
+	ambient *= attenuation;
+        diffuse *= attenuation;
+	specular *= attenuation;
+
+	return (ambient + (diffuse + specular));
+
+}

@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{00804e97-ea4d-452c-be6b-d3397352f194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ECS">
+      <UniqueIdentifier>{06b74727-268b-4a7a-b7d4-dcb48fca193d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\glew">
+      <UniqueIdentifier>{fe5a70aa-8a63-4e6d-80c9-1008f82922ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lights">
+      <UniqueIdentifier>{792e6b01-3025-43c0-b989-2bbc749ee366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{701a5898-38f5-41cc-ad37-b0877cdd097c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ECS\Systems">
+      <UniqueIdentifier>{f50e9a79-45a0-40f0-a9fb-2a797d128949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\collision">
+      <UniqueIdentifier>{e4e32ba1-1d2a-4a8a-98b9-ef7aa2584a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS">
+      <UniqueIdentifier>{ed783685-597a-4a96-91ac-9a2ea5cfec58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS\Systems">
+      <UniqueIdentifier>{5c80560b-d5ba-4725-a0fa-3c779f72009f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lights">
+      <UniqueIdentifier>{a3bbb9cc-b0db-48e8-b1d8-6d6cc7cacb9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\glew">
+      <UniqueIdentifier>{076f1700-eb0c-443b-b96d-dfbb91dc8f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{3a1e4402-432f-4b5a-91f8-7165a3f0e246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI">
+      <UniqueIdentifier>{96f589dc-8f2d-469e-9d57-d56e95aa969d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{a8772a90-ae13-466b-8c8f-4b38113fba65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\shadersettings">
+      <UniqueIdentifier>{5774d4d7-05fb-4d83-a0b6-124bbd47d034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\Actions">
+      <UniqueIdentifier>{40e0364e-0f53-45e0-ba35-74ec4cd29b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\Actions">
+      <UniqueIdentifier>{cb18012d-39f5-4579-8aa7-f763f9fbaf1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models and sounds">
+      <UniqueIdentifier>{e3b06a54-8c81-4a86-bd61-46c93d775152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models and sounds">
+      <UniqueIdentifier>{82e42663-ab4e-4f33-93d4-4cdb06f7bca4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inputlogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keystruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="maincamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="collisionFunction.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="collisioninfo.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="dirlight.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="entitymanager.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ID_manager.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="glew.h">
+      <Filter>Header Files\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="meshdrawdata.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="modelholder.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Opengldata.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderholder.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="TextManager.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexinfo.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="wglew.h">
+      <Filter>Header Files\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="projection.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="OBB.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="modelmatrixsystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="system_manager.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="spotlight.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Resourcemanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Octinfo.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="OctTree.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetingSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxIconSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthDisplaySystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="obbverimporter.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="OBBholder.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="spawnsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AImanager.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="projecttileinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIsystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="lifetimesystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Trackingboxsystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="shadersettings.h">
+      <Filter>Header Files\shadersettings</Filter>
+    </ClInclude>
+    <ClInclude Include="uisettings.h">
+      <Filter>Header Files\shadersettings</Filter>
+    </ClInclude>
+    <ClInclude Include="healthsettings.h">
+      <Filter>Header Files\shadersettings</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthCheckSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Maneuvers.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="action.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="attackaction.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="fleeaction.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="manaction.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="bombingrunaction.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="turretfireaction.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityTypes.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="orthographicsettings.h">
+      <Filter>Header Files\shadersettings</Filter>
+    </ClInclude>
+    <ClInclude Include="Idelaction.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="toenemycapship.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="soundholder.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="utilityfunction.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="usefulFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Teamunits.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="attackrun.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionFunctions.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="movementcontroller.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inputlogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="maincamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resourcemanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionFunction.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="OBB.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="glew.c">
+      <Filter>Source Files\glew</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="modelholder.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Opengldata.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="shaderholder.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="entitymanager.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="ID_manager.cpp">
+      <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="modelmatrixsystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="dirlight.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="spotlight.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="system_manager.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="OctTree.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="obbverimporter.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="OBBholder.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="spawnsystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AImanager.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetingSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthDisplaySystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="FireSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxIconSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="AIsystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Trackingboxsystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="lifetimesystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthCheckSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Maneuvers.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="turretfireaction.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="attackaction.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="bombingrunaction.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="fleeaction.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="manaction.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="toenemycapship.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Idelaction.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="action.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="soundholder.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="utilityfunction.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="usefulFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Teamunits.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="DecisionFunctions.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="attackrun.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="movementcontroller.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

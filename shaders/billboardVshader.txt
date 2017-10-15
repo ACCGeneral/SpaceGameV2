@@ -1,0 +1,38 @@
+#version 430 core
+layout (location = 0) in vec4 position;
+layout (location = 1) in vec3 normal;
+layout (location = 2) in vec2 texCoords;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+uniform vec3 scale;
+
+out vec2 TexCoords;
+
+void main()
+{
+ mat4 modelviewMat = view * model; 
+ 
+ modelviewMat[0][0] = 1 * scale.x; 
+ modelviewMat[0][1] = 0; 
+ modelviewMat[0][2] = 0; 
+
+ modelviewMat[1][0] = 0; 
+ modelviewMat[1][1] = 1 * scale.y; 
+ modelviewMat[1][2] = 0; 
+
+
+ modelviewMat[2][0] = 0; 
+ modelviewMat[2][1] = 0; 
+ modelviewMat[2][2] = 1 * scale.z; 
+
+
+
+ vec4 Nposition = modelviewMat * position;
+ gl_Position = projection * Nposition;
+
+ TexCoords = texCoords;
+}
+//Reference to http://www.geeks3d.com/20140807/billboarding-vertex-shader-glsl/

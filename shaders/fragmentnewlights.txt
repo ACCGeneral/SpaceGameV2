@@ -1,0 +1,79 @@
+#version 430 core
+
+in vec2 UV;
+in vec3 vNormalV;
+in vec3 FragPos;
+uniform sampler2D myTextureSampler;
+uniform vec3 camerapos;
+uniform bool gamma;
+uniform float strength;
+uniform float shine;
+
+struct dirLight 
+{
+vec3 direction;
+vec3 ambient;
+vec3 lightcolour;
+
+};
+
+vec3 AllDirectionalLight(dirLight light, vec3 normal, vec3 campos, vec3 Fpos);
+
+uniform dirLight mydirlight;
+
+vec2 flipped_texcoord = vec2(UV.x, 1.0 - UV.y);
+bool blinn;
+out vec4 color;
+
+void main()
+{
+    blinn = true;
+     vec3 curcolour;
+	
+    curcolour = AllDirectionalLight(mydirlight,vNormalV, camerapos, FragPos);
+	
+    if(gamma)
+    {
+       curcolour = pow(curcolour, vec3(1.0/2.2));
+    }
+    
+    color = vec4(curcolour,1.0);
+}	
+
+
+vec3 AllDirectionalLight(dirLight light, vec3 normal, vec3 campos, vec3 Fpos)
+{
+    vec3 memes = vec3(texture(myTextureSampler, flipped_texcoord));
+    vec3 ambient = light.ambient * memes;
+    vec3 norm = normalize(vNormalV);
+    vec3 lightdir = normalize(-light.direction);
+    float diff = max(dot(norm,lightdir), 0.0);
+    vec3 diffuse = ambient + ((light.lightcolour * diff) * memes);
+
+    vec3 camdir = normalize(camerapos - Fpos);
+    vec3 reflectDir = reflect(light.direction, norm);
+    vec3 halfwayvec = normalize(lightdir + camdir);
+    float spec;
+    if(blinn)
+	{
+	    spec = max(dot(norm, halfwayvec), 0.0);
+	    spec = pow(spec, shine);
+	}
+    else
+	{	
+	    spec = max(dot(camdir, reflectDir), 0.0);
+            spec = pow(spec, shine);
+      }
+    
+  vec3 specular = (light.lightcolour * spec * strength) * memes;
+
+    return (diffuse + specular);
+
+}
+
+
+
+
+
+
+
