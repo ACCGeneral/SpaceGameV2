@@ -12,6 +12,7 @@
 class entitymanager;
 class SceneManager;
 class scene;
+class EventSystem;
 
 //base class for our engine setup
 
@@ -35,6 +36,7 @@ namespace ACC
 
 		int frametimelast;
 		int framespersecond;
+		std::shared_ptr<EventSystem> Events;
 
 	public:
 

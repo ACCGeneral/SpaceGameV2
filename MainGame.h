@@ -9,8 +9,7 @@ class MainGame : public scene
 {
 private:
 
-	std::shared_ptr<world> myworld;
-	std::shared_ptr<ACC::System_Manager> MyManager;
+	
 	spawnsystem myspawnsystem;
 
 	std::shared_ptr<healthcomponent> allycapship;
@@ -26,5 +25,6 @@ public:
 	void update(float dt, bool &go);
 	void draw(float dt);
 	void exit();
+	void endcondition(bool &go);
 
 };

@@ -7,6 +7,7 @@
 //the base class for our scenes 
 
 class SceneManager;
+class RenderSystem;
 
 class scene : public std::enable_shared_from_this<scene>
 {
@@ -14,7 +15,14 @@ private:
 
 protected:
 
+	std::shared_ptr<world> myworld;
 	std::shared_ptr<SceneManager> myscenemanager;
+
+	std::shared_ptr<RenderSystem> myRenderSystem;
+	std::vector<std::shared_ptr<ACC::System>> myupdatesystems;
+
+	void updateEnts();
+	void destroyEnts();
 
 public:
 

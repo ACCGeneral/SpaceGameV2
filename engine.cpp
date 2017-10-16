@@ -4,6 +4,7 @@
 #include "inputlogger.h"
 #include "TextManager.h"
 #include "MainGame.h"
+#include "EventSystem.h"
 
 bool InitGL();
 
@@ -120,8 +121,6 @@ void ACC::engine::update()
 
 }
 
-
-
 void ACC::engine::cleanup() //clean up our engine
 {
 	SDL_GL_DeleteContext(glcontext);
@@ -133,8 +132,6 @@ void ACC::engine::cleanup() //clean up our engine
 	alcDestroyContext(context);
 	alcCloseDevice(device);
 }
-
-
 
 
 bool InitGL() // setup for opengl

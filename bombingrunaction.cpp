@@ -108,7 +108,7 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 
 	float t;
 
-	if (enemycol->myAABB->raycollision(newray, t) && targetdistance < 500)
+	if (enemycol->mysphere->raycollision(newray, t) && targetdistance < 600)
 	{
 		std::shared_ptr<fighterguns> myguns = me->getcomponent<fighterguns>();
 		if (myguns->currettime >= myguns->firetime)

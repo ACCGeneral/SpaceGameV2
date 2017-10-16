@@ -28,7 +28,6 @@ MainGame::MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entityman
 
 void MainGame::init()
 {
-	MyManager = std::make_shared<ACC::System_Manager>(getself(), myworld);
 	myworld->setmaincam(std::make_shared<maincamera>());
 	myworld->setoct(new OctTree(glm::vec3(-4000, -4000, -4000), glm::vec3(4000, 4000, 4000)));
 	myworld->returnoct()->construct(NULL, 2);
@@ -36,62 +35,44 @@ void MainGame::init()
 	myworld->returnmanager()->create_skybox();
 	enemycapship = myworld->returnmanager()->createEnemyCapital(glm::vec3(-500, 0, 100));
 	allycapship = myworld->returnmanager()->createAllyCapital(glm::vec3(500, 0, 0));
-	
 	myworld->returnmanager()->createplayer(myspawnsystem.getallyspawn());
-	/*myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
 	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
-	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());*/
-	/*myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
+	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
+	myworld->returnmanager()->createAllyFighter(myspawnsystem.getallyspawn());
 	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
-	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());*/
-
-	/*myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
+	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
+	myworld->returnmanager()->createAllyBomber(myspawnsystem.getallyspawn());
 	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
 	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
-	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());*/
-	/*myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
+	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
+	myworld->returnmanager()->createEnemyFighter(myspawnsystem.getenemyspawn());
 	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
-	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());*/
-	
-
+	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
+	myworld->returnmanager()->createEnemyBomber(myspawnsystem.getenemyspawn());
 	std::shared_ptr<dirlight> themainlight = std::make_shared<dirlight>();
 	themainlight->setdir(glm::vec3(0.0, -1.0, 0.0));
 	themainlight->setamb(glm::vec3(0.5, 0.5, 0.5));
 	themainlight->setlightcolour(glm::vec3(1.0, 1.0, 1.0));
 	myworld->returnmanager()->create_directionlight(themainlight);
 
-	std::shared_ptr<RenderSystem> myrendersystem = std::make_shared<RenderSystem>(myworld);
-	MyManager->setrender(myrendersystem);
-	std::shared_ptr<SoundSystem> soundSystem = std::make_shared<SoundSystem>(myworld,0.2f);
-	MyManager->addsystem(soundSystem);
-	std::shared_ptr<PlayerSystem> playersys = std::make_shared<PlayerSystem>(myworld);
-	MyManager->addsystem(playersys);
-	std::shared_ptr<AIsystem> aisys = std::make_shared<AIsystem>(myworld);
-	MyManager->addsystem(aisys);
-	std::shared_ptr<FireSystem> firesys = std::make_shared<FireSystem>(myworld);
-	MyManager->addsystem(firesys);
-	std::shared_ptr<PhysicsSystsem> physiscs = std::make_shared<PhysicsSystsem>(myworld);
-	MyManager->addsystem(physiscs);
-	std::shared_ptr<BoxIconSystem> boxsys = std::make_shared<BoxIconSystem>(myworld);
-	MyManager->addsystem(boxsys);
-	std::shared_ptr<Trackingboxsystem> trackboxsys = std::make_shared<Trackingboxsystem>(myworld);
-	MyManager->addsystem(trackboxsys);
-	std::shared_ptr<HealthDisplaySystem> healthsystem = std::make_shared<HealthDisplaySystem>(myworld);
-	MyManager->addsystem(healthsystem);
-	std::shared_ptr<TargetingSystem> trackerarrows = std::make_shared<TargetingSystem>(myworld);
-	MyManager->addsystem(trackerarrows);
-	std::shared_ptr<CollisionSystem> colsystem = std::make_shared<CollisionSystem>(myworld);
-	MyManager->addsystem(colsystem);
-	std::shared_ptr<AnimationSystem> anisystem = std::make_shared<AnimationSystem>(myworld);
-	MyManager->addsystem(anisystem);
-	std::shared_ptr<modelmatrixsystem> modelupdate = std::make_shared<modelmatrixsystem>(myworld);
-	MyManager->addsystem(modelupdate);
-	std::shared_ptr<lifetimesystem> lifesystem = std::make_shared<lifetimesystem>(myworld);
-	MyManager->addsystem(lifesystem);
-	std::shared_ptr<HealthCheckSystem> healthchecksystem = std::make_shared<HealthCheckSystem>(myworld);
-	MyManager->addsystem(healthchecksystem);
+	myRenderSystem = std::make_shared<RenderSystem>(myworld);
+	myupdatesystems.push_back(std::make_shared<SoundSystem>(myworld,0.2f));
+	myupdatesystems.push_back(std::make_shared<PlayerSystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<AIsystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<FireSystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<PhysicsSystsem>(myworld));
+	myupdatesystems.push_back(std::make_shared<BoxIconSystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<Trackingboxsystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<HealthDisplaySystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<TargetingSystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<CollisionSystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<AnimationSystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<modelmatrixsystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<lifetimesystem>(myworld));
+	myupdatesystems.push_back(std::make_shared<HealthCheckSystem>(myworld));
+	
 
-	MyManager->updatesystements();
+	updateEnts();
 	myworld->getmaincam()->setProjection(glm::perspective(glm::radians(52.0f), (float)1280.0f / (float)720.0f, 0.1f, 10000.0f));
 
 	std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
@@ -107,37 +88,29 @@ void MainGame::update(float dt, bool & go)
 	myspawnsystem.createents(myworld->returnmanager());
 
 	float tempdt = dt;
-
 	bool yes = true;
-	MyManager->updatesystements(); //add the new entities created 
-
+	updateEnts();
 
 	while (tempdt > 0.0)
 	{
 		float deltatime = std::fmin(tempdt, wantedFPS);
-		MyManager->update(deltatime, go); // updata all none render systems
+		for (int i = 0; i < myupdatesystems.size(); i++)
+		{
+			myupdatesystems[i]->update(tempdt, yes);
+		}
 		tempdt -= deltatime;
 	}
 	
 	myspawnsystem.update(dt);
 
-	if (allycapship != NULL)
-	{
-		if (allycapship->health <= 0 || enemycapship->health <= 0)
-		{
-			allycapship = NULL;
-			enemycapship = NULL;
-
-			return;
-		}
-	}
-	
+	endcondition(go);
 }
 
 void MainGame::draw(float dt)
 {
 	bool yes = true;
-	MyManager->render(dt, yes); // render our scene 
+
+	myRenderSystem->update(dt, yes); // render our scene 
 
 	if (allycapship != NULL && enemycapship != NULL)
 	{
@@ -150,7 +123,7 @@ void MainGame::draw(float dt)
 
 	myspawnsystem.addrespawndata(myworld->returnmanager()->returntodelete());
 
-	MyManager->deletesystements();
+	destroyEnts();
 	myworld->returnmanager()->cleartodelete();
 }
 
@@ -160,6 +133,28 @@ void MainGame::exit()
 	delete myworld->returnoct();
 	myworld->exit();
 	myworld.reset();
-	MyManager->cleanupsystems();
+
+	for (int i = 0; i < myupdatesystems.size(); i++)
+	{
+		myupdatesystems.erase(myupdatesystems.begin() + i);
+		i--;
+	}
+
+}
+
+void MainGame::endcondition(bool &go)
+{
+	if (allycapship != NULL)
+	{
+		if (allycapship->health <= 0)
+		{
+			allycapship = NULL;
+			
+		}
+		else if (enemycapship->health <= 0)
+		{
+			enemycapship = NULL;
+		}
+	}
 
 }

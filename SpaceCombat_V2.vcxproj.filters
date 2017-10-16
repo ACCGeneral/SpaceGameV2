@@ -70,6 +70,9 @@
     <Filter Include="Source Files\Models and sounds">
       <UniqueIdentifier>{82e42663-ab4e-4f33-93d4-4cdb06f7bca4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{be991cc5-eb6d-4309-80e4-8981f9bd92c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -317,6 +320,12 @@
     </ClInclude>
     <ClInclude Include="SoundSystem.h">
       <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEvent.h">
+      <Filter>Header Files\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
