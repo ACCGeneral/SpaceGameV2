@@ -818,6 +818,12 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	trans->scale = glm::vec3(1, 1, 1);
 	turretEntity->addcomponent(trans);
 
+	std::shared_ptr<animationholdercomp> anim = std::make_shared<animationholdercomp>();
+	anim->mytype = anim->trans;
+	anim->myowner = mycap;
+	anim->offset = offset;
+	turretEntity->addcomponent(anim);
+
 	std::shared_ptr<directioncomponent> dir = std::make_shared<directioncomponent>();
 	dir->direction = glm::vec3(0, 0, 1);
 	dir->newdirect = trans->myquat * dir->direction;

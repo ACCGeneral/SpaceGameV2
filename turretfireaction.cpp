@@ -84,6 +84,7 @@ void turretfireaction::run(float dt, std::shared_ptr<world> myworld)
 
 	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
 	std::shared_ptr<transposecomponent> targettrans = target->getcomponent<transposecomponent>();
+	std::shared_ptr<animationholdercomp> myanim = me->getcomponent<animationholdercomp>();
 
 	std::shared_ptr<turretcomp> myturretcomp = me->getcomponent<turretcomp>();
 
@@ -102,11 +103,10 @@ void turretfireaction::run(float dt, std::shared_ptr<world> myworld)
 		glm::mat4 lookatmatrix = glm::transpose(glm::lookAt(lookat, mytrans->position, glm::vec3(0.0f, 1.0f, 0.0f)));
 		glm::quat newrotation = glm::toQuat(lookatmatrix);
 		float angleofRot = glm::clamp(4.0f * dt, 0.0f, 1.0f);
-		mytrans->myquat = glm::slerp(mytrans->myquat, newrotation, angleofRot);
+		myanim->myanimation = glm::slerp(myanim->myanimation, newrotation, angleofRot);
 		mydir->newdirect = mytrans->myquat * mydir->direction;
 		firegunstest(dt);
 		time -= dt;
-	
 	}
 	else
 	{

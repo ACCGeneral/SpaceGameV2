@@ -30,8 +30,9 @@ void fleeaction::run(float dt, std::shared_ptr<world> myworld)
 	std::shared_ptr<transposecomponent> fleetrans = fleefrom->getcomponent<transposecomponent>();
 	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
 	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
+	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
 
-	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxvelocity) * 80, 12.0f);
+	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxvelocity) * 80, mycol->mysphere->rad);
 
 	glm::vec3 fleeforce = myai->MovCon.fleefromobject(fleetrans->position) * 0.7f;
 

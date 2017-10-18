@@ -36,16 +36,16 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
 	std::shared_ptr<transposecomponent> attacktrans = mytarget->getcomponent<transposecomponent>();
 	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
+	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
+	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
 
 	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
-
-	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
 
 	glm::vec3 seekforce;
 
 	glm::vec3 seperationforce = myai->MovCon.seperation(myteam) * 0.4f;
 
-	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxvelocity) * 100,6.0f);
+	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxvelocity) * 100, mycol->mysphere->rad);
 
 	float targetdistance = glm::length(mytrans->position - attacktrans->position);
 

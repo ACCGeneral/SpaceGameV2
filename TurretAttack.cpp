@@ -1,29 +1,31 @@
-#include "bombingrunaction.h"
+#include "TurretAttack.h"
 #include "entity.h"
 #include "world.h"
+#include "Teamunits.h"
 #include "OctTree.h"
 
-void bombingrunaction::setmyman(maneuver mym)
+void TurretAttack::setmyman(maneuver mym)
 {
 	myman = mym;
 
 }
 
-void bombingrunaction::setcaptarget(std::shared_ptr<ACC::entity> captar)
+void TurretAttack::setcaptarget(std::shared_ptr<ACC::entity> captar)
 {
 	mytarget = captar;
 
 }
 
-void bombingrunaction::start()
+void TurretAttack::start()
 {
 	man = false;
 	roll = 0;
 	mannum = 0;
 
+
 }
 
-void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
+void TurretAttack::run(float dt, std::shared_ptr<world> myworld)
 {
 	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
 	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
@@ -33,7 +35,9 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 
 	std::shared_ptr<transposecomponent> enemytrans = mytarget->getcomponent<transposecomponent>();
 	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
+	std::shared_ptr<animationholdercomp> myanimation = mytarget->getcomponent<animationholdercomp>();
 
+	std::shared_ptr<collisioncomp> capitalcol = myanimation->myowner->getcomponent<collisioncomp>();
 
 	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxvelocity) * 100, mycol->mysphere->rad);
 
@@ -44,7 +48,7 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 	if (man == false)
 	{
 
-		if (targetdistance < (mycol->mysphere->rad + enemycol->mysphere->rad + 2.0f))
+		if (targetdistance < (mycol->mysphere->rad + enemycol->mysphere->rad + 2.0f) || targetdistance < (mycol->mysphere->rad + capitalcol->mysphere->rad + 2.0f))
 		{
 			man = true;
 			for (int i = 0; i < myman.manpos.size(); i++)
@@ -136,11 +140,12 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 
 	time -= dt;
 
+
+
 }
 
-void bombingrunaction::end()
+void TurretAttack::end()
 {
-
 
 
 }

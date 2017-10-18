@@ -164,6 +164,7 @@ void AImanager::decideonaction(std::shared_ptr<ACC::entity> unit)
 	{
 		toenemycap(unit, enemyteam, 500.0f);
 		bombingrun(unit, enemyteam, mymanuvers.getrandom(), mymanuvers.getcurtain("attackrun"));
+		attackturret(unit, enemyteam, mymanuvers.getrandom());
 	}
 	else if (unit->returntype() == enttypes::Turrent)
 	{

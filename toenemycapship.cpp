@@ -16,13 +16,15 @@ void toenemycapship::start()
 
 void toenemycapship::run(float dt, std::shared_ptr<world> myworld)
 {
-	std::shared_ptr<transposecomponent> captrans = capattack->getcomponent<transposecomponent>();
 	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
 	std::shared_ptr<physics> myphys = me->getcomponent<physics>();
 	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
 	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
+	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
 
-	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxvelocity) * 80, 12.0f);
+	std::shared_ptr<transposecomponent> captrans = capattack->getcomponent<transposecomponent>();
+
+	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxvelocity) * 80, mycol->mysphere->rad);
 
 	if (glm::length(mytrans->position - captrans->position) < 50)
 	{
@@ -44,7 +46,7 @@ void toenemycapship::run(float dt, std::shared_ptr<world> myworld)
 		{
 			avoidforce = myai->MovCon.avoidobject(raycol.hitpoint, raycol.center);
 		}
-	myphys->force = seekforce + avoidforce;
+		myphys->force = seekforce + avoidforce;
 	}
 
 	glm::vec3 attackvec = myphys->velocity + mytrans->position;

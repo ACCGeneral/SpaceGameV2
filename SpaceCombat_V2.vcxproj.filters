@@ -327,6 +327,9 @@
     <ClInclude Include="SoundEvent.h">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
+    <ClInclude Include="TurretAttack.h">
+      <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common.cpp">
@@ -523,6 +526,9 @@
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TurretAttack.cpp">
+      <Filter>Source Files\AI\Actions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

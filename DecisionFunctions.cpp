@@ -1,4 +1,16 @@
 #include "DecisionFunctions.h"
+#include "action.h"
+#include "fleeaction.h"
+#include "bombingrunaction.h"
+#include "attackaction.h"
+#include "Idelaction.h"
+#include "toenemycapship.h"
+#include "turretfireaction.h"
+#include "Maneuvers.h"
+#include "utilityfunction.h"
+#include "usefulFunctions.h"
+#include "attackrun.h"
+#include "TurretAttack.h"
 
 void toenemycap(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits> enemyunits, float maxdistance)
 {
@@ -32,57 +44,23 @@ void bombingrun(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits>  ene
 	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
 	std::shared_ptr<AIcomp> myaicomp = me->getcomponent<AIcomp>();
 
-
 	std::shared_ptr<ACC::entity> besttarget;
 	float bestscore = 0.0;
-
-	float healthscore;
-	float distancescore;
-	float anglescore;
-	float turretbonus = 1.2;
-
-
-	for (int i = 0; i < enemyunits->turrets.size(); i++)
-	{
-		std::shared_ptr<transposecomponent> enemytrans = enemyunits->turrets[i]->getcomponent<transposecomponent>();
-		std::shared_ptr<healthcomponent> enemyhealth = enemyunits->turrets[i]->getcomponent<healthcomponent>();
-
-		distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
-		distancescore = setclamp(linearandquadratic(0.0f, distancescore, 0.8),0.2,1);
-
-		healthscore = invert(enemyhealth->health/ enemyhealth->maxhp,1);
-		healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.5, 1);
-
-		glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
-		float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
-		float degreecheck = glm::degrees(shotdegrees);
-
-		anglescore = invert(degreecheck / 180.0f,1);
-		anglescore = setclamp(logisticscore(2,anglescore,0.6,-10), 0.3, 1);
-
-		float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore) * turretbonus;
-
-		if (newscore > bestscore)
-		{
-			besttarget = enemyunits->turrets[i];
-			bestscore = newscore;
-		}
-	}
 
 	std::shared_ptr<transposecomponent> enemytrans = enemyunits->capital->getcomponent<transposecomponent>();
 	std::shared_ptr<healthcomponent> enemyhealth = enemyunits->capital->getcomponent<healthcomponent>();
 
-	distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
+	float distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
 	distancescore = setclamp(linearandquadratic(0.0f, distancescore, 0.8), 0.2, 1);
 
-	healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
+	float healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
 	healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.5, 1);
 
 	glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
 	float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
 	float degreecheck = glm::degrees(shotdegrees);
 
-	anglescore = invert(degreecheck / 180.0f, 1);
+	float anglescore = invert(degreecheck / 180.0f, 1);
 	anglescore = setclamp(logisticscore(2, anglescore, 0.6, -10), 0.3, 1);
 
 	float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore);
@@ -104,7 +82,6 @@ void bombingrun(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits>  ene
 		newaction.setmyman(touse);
 		newaction.start();
 		myaicomp->myaction = std::make_unique<bombingrunaction>(newaction);
-		
 	}
 
 
@@ -470,4 +447,63 @@ bool flyerunittypes(std::shared_ptr<ACC::entity> unit)
 	}
 
 	return false;
+}
+
+void attackturret(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits> enemyunits, maneuver touse)
+{
+	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
+	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
+	std::shared_ptr<AIcomp> myaicomp = me->getcomponent<AIcomp>();
+
+
+	std::shared_ptr<ACC::entity> besttarget;
+	float bestscore = 0.0;
+
+	float healthscore;
+	float distancescore;
+	float anglescore;
+	float turretbonus = 1.2;
+
+
+	for (int i = 0; i < enemyunits->turrets.size(); i++)
+	{
+		std::shared_ptr<transposecomponent> enemytrans = enemyunits->turrets[i]->getcomponent<transposecomponent>();
+		std::shared_ptr<healthcomponent> enemyhealth = enemyunits->turrets[i]->getcomponent<healthcomponent>();
+
+		distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
+		distancescore = setclamp(linearandquadratic(0.0f, distancescore, 1.0), 1.5, 1);
+
+		healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
+		healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.5, 1);
+
+		glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
+		float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
+		float degreecheck = glm::degrees(shotdegrees);
+
+		anglescore = invert(degreecheck / 180.0f, 1);
+		anglescore = setclamp(logisticscore(2, anglescore, 0.6, -10), 0.3, 1);
+
+		float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore) * turretbonus;
+
+		if (newscore > bestscore)
+		{
+			besttarget = enemyunits->turrets[i];
+			bestscore = newscore;
+		}
+	}
+
+	if (myaicomp->score < bestscore)
+	{
+		myaicomp->score = bestscore;
+		TurretAttack newaction;
+		newaction.setcaptarget(besttarget);
+		newaction.addme(me);
+		newaction.settime(10.0f);
+		newaction.setmyman(touse);
+		newaction.start();
+		myaicomp->myaction = std::make_unique<TurretAttack>(newaction);
+	}
+
+
+
 }
