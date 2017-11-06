@@ -123,7 +123,7 @@ void PlayerSystem::update(float & dt, bool & go)
 
 	playerdir->newdirect = playertrans->myquat * playerdir->direction;
 
-	if (inputlogger::instance().getkeydown(SDLK_w) && playerphysics->speed < playerphysics->maxvelocity)
+	if (inputlogger::instance().getkeydown(SDLK_w) && playerphysics->speed < playerphysics->maxspeed)
 	{
 		playerphysics->speed += 0.2;
 	}

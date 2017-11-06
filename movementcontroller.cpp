@@ -18,7 +18,7 @@ glm::vec3 movementcontroller::seekobject(glm::vec3 toseek)
 	std::shared_ptr<transposecomponent> mytrans = myentity->getcomponent<transposecomponent>();
 	std::shared_ptr<physics> myphys = myentity->getcomponent<physics>();
 
-	glm::vec3 seekforce = glm::normalize(toseek - mytrans->position) * myphys->maxforce;
+	glm::vec3 seekforce = glm::normalize(toseek - mytrans->position) * myphys->maxspeed;
 	return seekforce - myphys->velocity;
 }
 
@@ -27,7 +27,7 @@ glm::vec3 movementcontroller::fleefromobject(glm::vec3 tofeel)
 	std::shared_ptr<transposecomponent> mytrans = myentity->getcomponent<transposecomponent>();
 	std::shared_ptr<physics> myphys = myentity->getcomponent<physics>();
 
-	glm::vec3 fleeforce = glm::normalize(mytrans->position - tofeel) * myphys->maxforce;
+	glm::vec3 fleeforce = glm::normalize(mytrans->position - tofeel) * myphys->maxspeed;
 	return fleeforce - myphys->velocity;
 }
 
@@ -42,11 +42,11 @@ glm::vec3 movementcontroller::arrivetobject(glm::vec3 toseek, float slowrad)
 
 	if (distancelengh < slowrad)
 	{
-		seekforce = glm::normalize(wantedvel) * myphys->maxforce * (distancelengh / slowrad);
+		seekforce = glm::normalize(wantedvel) * myphys->maxspeed * (distancelengh / slowrad);
 	}
 	else
 	{
-		seekforce = glm::normalize(wantedvel) * myphys->maxforce;
+		seekforce = glm::normalize(wantedvel) * myphys->maxspeed;
 	}
 
 	return seekforce - myphys->velocity;
@@ -58,7 +58,7 @@ glm::vec3 movementcontroller::avoidobject(glm::vec3 hitpos, glm::vec3 centerpoin
 	std::shared_ptr<physics> myphys = myentity->getcomponent<physics>();
 
 	hitpos += glm::vec3(0.01, 0.1, 0.011);
-	glm::vec3 avoidforce = glm::normalize(hitpos - centerpoint) * myphys->maxforce;
+	glm::vec3 avoidforce = glm::normalize(hitpos - centerpoint) * myphys->maxspeed;
 	return avoidforce - myphys->velocity;
 }
 
@@ -98,7 +98,7 @@ glm::vec3 movementcontroller::seperation(std::shared_ptr<teamunits> myteam)
 			glm::vec3 temp = mytrans->position - enemytrans->position;
 			float dis = glm::length(temp);
 
-			if (glm::abs(dis) < seperationsphere)
+			if (glm::abs(dis) <= seperationsphere)
 			{
 				seperationforce += glm::normalize(temp) / dis;
 				neighbors++;
@@ -109,13 +109,9 @@ glm::vec3 movementcontroller::seperation(std::shared_ptr<teamunits> myteam)
 
 	if (neighbors == 0)
 	{
-		seperationforce = glm::vec3(0.0f);
-	}
-	else
-	{
-		seperationforce = glm::normalize(seperationforce) * myphys->maxforce;
+		return seperationforce = glm::vec3(0.0f);
 	}
 
-
-	return seperationforce - myphys->velocity;;
+	seperationforce = glm::normalize(seperationforce) * myphys->maxspeed;
+	return seperationforce - myphys->velocity;
 }

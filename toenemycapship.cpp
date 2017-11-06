@@ -24,7 +24,7 @@ void toenemycapship::run(float dt, std::shared_ptr<world> myworld)
 
 	std::shared_ptr<transposecomponent> captrans = capattack->getcomponent<transposecomponent>();
 
-	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxvelocity) * 80, mycol->mysphere->rad);
+	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 80, mycol->mysphere->rad);
 
 	if (glm::length(mytrans->position - captrans->position) < 50)
 	{

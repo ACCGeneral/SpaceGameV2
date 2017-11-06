@@ -19,7 +19,7 @@ void attackaction::start()
 {
 	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
 
-	orgmaxvel = myphyscomp->maxvelocity;
+	orgmaxvel = myphyscomp->maxspeed;
 }
 
 void attackaction::run(float dt, std::shared_ptr<world> myworld)
@@ -45,21 +45,21 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	glm::vec3 seperationforce = myai->MovCon.seperation(myteam) * 0.4f;
 
-	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxvelocity) * 100, mycol->mysphere->rad);
+	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxspeed) * 100, mycol->mysphere->rad);
 
 	float targetdistance = glm::length(mytrans->position - attacktrans->position);
 
-	if (targetdistance <= 150)
+	if (targetdistance <= 200)
 	{
 		std::shared_ptr<physics> enemyphys = mytarget->getcomponent<physics>();
-		myphyscomp->maxvelocity = enemyphys->maxvelocity;
+		myphyscomp->maxspeed = enemyphys->maxspeed - 5;
 	}
 	else
 	{
-		myphyscomp->maxvelocity = orgmaxvel;
+		myphyscomp->maxspeed = orgmaxvel;
 	}
 
-	seekforce = myai->MovCon.seekobject(attacktrans->position) * 0.7f;
+	seekforce = myai->MovCon.seekobject(enemycol->myAABB->mypos) * 0.8f;
 	
 	Ray newray;
 	newray.pos = mytrans->position;
@@ -73,7 +73,7 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	if (raycol.hit == true)
 	{
-		if (raycol.closestID != mytarget->returnID() || raycol.t < 20)
+		if (raycol.closestID != mytarget->returnID() || raycol.t < 80)
 		{
 			avoidforce = myai->MovCon.avoidobject(raycol.hitpoint, raycol.center);
 		}
@@ -122,5 +122,5 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 void attackaction::end()
 {
 	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
-	myphyscomp->maxvelocity = orgmaxvel;
+	myphyscomp->maxspeed = orgmaxvel;
 }

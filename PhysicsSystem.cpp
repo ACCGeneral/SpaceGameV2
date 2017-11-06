@@ -38,16 +38,13 @@ void PhysicsSystsem::update(float & dt, bool & go)
 			{
 				entvel->force = glm::normalize(entvel->force) * entvel->maxforce;
 			}
-			glm::vec3 acceleration = entvel->force / entvel->mass;
+			glm::vec3 acceleration = entvel->force / (entvel->mass);
 			entvel->force = glm::vec3(0.0f, 0.0f, 0.0f);
 			entvel->velocity += acceleration * dt;
-
-			
-			if (glm::length(entvel->velocity) > entvel->maxvelocity)
+			if (glm::length(entvel->velocity) > entvel->maxspeed)
 			{
-				entvel->velocity = glm::normalize(entvel->velocity) * entvel->maxvelocity;
+				entvel->velocity = glm::normalize(entvel->velocity) * entvel->maxspeed;
 			}
-
 			enttra->position += entvel->velocity * dt;
 		}
 	}

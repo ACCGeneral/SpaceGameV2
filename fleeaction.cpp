@@ -32,7 +32,7 @@ void fleeaction::run(float dt, std::shared_ptr<world> myworld)
 	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
 	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
 
-	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxvelocity) * 80, mycol->mysphere->rad);
+	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxspeed) * 80, mycol->mysphere->rad);
 
 	glm::vec3 fleeforce = myai->MovCon.fleefromobject(fleetrans->position) * 0.7f;
 

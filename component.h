@@ -212,10 +212,10 @@ public:
 	static const int TypeID = 9;
 
 	float mass;
-	float maxvelocity;
 	glm::vec3 velocity;
 	float speed;
 	float maxforce;
+	float maxspeed;
 	glm::vec3 force;
 	bool physicsobject;
 
@@ -525,3 +525,14 @@ public:
 	soundtype mytype;
 
 };
+
+
+class particalemmiter : public ACC::component
+{
+
+public:
+	static const int TypeID = 27;
+	int GetType() const { return TypeID; };
+
+};
+

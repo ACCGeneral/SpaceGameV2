@@ -35,7 +35,7 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
 
 
-	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxvelocity) * 100, mycol->mysphere->rad);
+	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 100, mycol->mysphere->rad);
 
 	glm::vec3 seekforce;
 

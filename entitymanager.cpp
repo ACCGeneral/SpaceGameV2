@@ -121,8 +121,8 @@ void entitymanager::createplayer(glm::vec3 pos)
 	player->addcomponent(playercom);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
-	physicscomp->mass = 10;
-	physicscomp->maxvelocity = 100;
+	physicscomp->mass = 1;
+	physicscomp->maxspeed = 100;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = false;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -218,9 +218,9 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	enemyfighter->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
-	physicscomp->mass = 5;
-	physicscomp->maxvelocity = 100.0f;
-	physicscomp->maxforce = 800.0f;
+	physicscomp->mass = 1;
+	physicscomp->maxspeed = 100.0f;
+	physicscomp->maxforce = 60.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = true;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -272,7 +272,7 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(enemyfighter);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	enemyfighter->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -322,9 +322,9 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	enemeybomber->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
-	physicscomp->mass = 10;
-	physicscomp->maxvelocity = 80.0f;
-	physicscomp->maxforce = 700.0f;
+	physicscomp->mass = 1;
+	physicscomp->maxspeed = 80.0f;
+	physicscomp->maxforce = 40.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = true;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -375,7 +375,7 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(enemeybomber);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	enemeybomber->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -412,7 +412,7 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
 	physicscomp->mass = 200;
-	physicscomp->maxvelocity = 100.0f;
+	physicscomp->maxspeed = 100.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = false;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -461,7 +461,7 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	AI->MovCon.setme(EnemyCapital);
 	EnemyCapital->addcomponent(AI);
 
@@ -522,9 +522,9 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	AllyFighter->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
-	physicscomp->mass = 5;
-	physicscomp->maxvelocity = 100.0f;
-	physicscomp->maxforce = 800.0f;
+	physicscomp->mass = 1;
+	physicscomp->maxforce = 60.0f;
+	physicscomp->maxspeed = 100.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = true;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -576,7 +576,7 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(AllyFighter);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	AllyFighter->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -626,10 +626,10 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	allybomber->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
-	physicscomp->mass = 10;
-	physicscomp->maxvelocity = 80.0f;
-	physicscomp->maxforce = 700.0f;
+	physicscomp->mass = 1;
 	physicscomp->speed = 0.0f;
+	physicscomp->maxforce = 40.0f;
+	physicscomp->maxspeed = 80.0f;
 	physicscomp->physicsobject = true;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
 	allybomber->addcomponent(physicscomp);
@@ -679,7 +679,7 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(allybomber);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	allybomber->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -716,7 +716,7 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
 	physicscomp->mass = 200;
-	physicscomp->maxvelocity = 100.0f;
+	physicscomp->maxspeed = 100.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = false;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -766,7 +766,7 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(AllyCapital);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	AllyCapital->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -840,7 +840,7 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
 	physicscomp->mass = 50;
-	physicscomp->maxvelocity = 0.0f;
+	physicscomp->maxspeed = 0.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = false;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -898,7 +898,7 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(turretEntity);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
 	turretEntity->addcomponent(AI);
 
 	entities[turretEntity->returnID()] = turretEntity;
@@ -1079,8 +1079,8 @@ void entitymanager::createbullet(projectileinfo info)
 	speedcomp->mass = 1;
 	speedcomp->physicsobject = false;
 	speedcomp->speed = info.speed;
-	speedcomp->maxvelocity = 300;
-	speedcomp->velocity = dir->newdirect * speedcomp->maxvelocity;
+	speedcomp->maxspeed = 300;
+	speedcomp->velocity = dir->newdirect * speedcomp->maxspeed;
 	bullet->addcomponent(speedcomp);
 
 	std::shared_ptr<collisioncomp> col = std::make_shared<collisioncomp>();
@@ -1158,8 +1158,8 @@ void entitymanager::createbomb(projectileinfo info)
 	speedcomp->mass = 1;
 	speedcomp->physicsobject = false;
 	speedcomp->speed = info.speed;
-	speedcomp->maxvelocity = 280;
-	speedcomp->velocity = dir->newdirect * speedcomp->maxvelocity;
+	speedcomp->maxspeed = 280;
+	speedcomp->velocity = dir->newdirect * speedcomp->maxspeed;
 	bomb->addcomponent(speedcomp);
 
 	std::shared_ptr<collisioncomp> col = std::make_shared<collisioncomp>();

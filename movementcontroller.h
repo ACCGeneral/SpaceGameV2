@@ -17,16 +17,32 @@ private:
 
 	std::shared_ptr<ACC::entity> myentity;
 	float seperationsphere;
+	float maxforce;
+	glm::vec3 newforce;
 
 public:
 
 	movementcontroller()
 	{
-
+		maxforce = 0;
+		newforce = glm::vec3(0, 0, 0);
 	}
 
 	void setme(std::shared_ptr<ACC::entity> me);
 	void setsepsphere(float sep);
+
+	void setmaxforce(float max_force)
+	{
+		maxforce = max_force;
+	}
+	void reset()
+	{
+		newforce = glm::vec3(0, 0, 0);
+	}
+	glm::vec3 returnForce()
+	{
+		return newforce;
+	}
 
 	glm::vec3 seekobject(glm::vec3 toseek);
 
@@ -41,3 +57,5 @@ public:
 	glm::vec3 seperation(std::shared_ptr<teamunits> myteam);
 
 };
+
+
