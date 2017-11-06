@@ -73,7 +73,7 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	if (raycol.hit == true)
 	{
-		if (raycol.closestID != mytarget->returnID() || raycol.t < 80)
+		if (raycol.closestID != mytarget->returnID() || raycol.t < mycol->mysphere->rad + 80)
 		{
 			avoidforce = myai->MovCon.avoidobject(raycol.hitpoint, raycol.center);
 		}
