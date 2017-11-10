@@ -49,10 +49,10 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	float targetdistance = glm::length(mytrans->position - attacktrans->position);
 
-	if (targetdistance <= 200)
+	if (targetdistance <= 100)
 	{
 		std::shared_ptr<physics> enemyphys = mytarget->getcomponent<physics>();
-		myphyscomp->maxspeed = enemyphys->maxspeed - 5;
+		myphyscomp->maxspeed = glm::length(enemyphys->velocity);
 	}
 	else
 	{

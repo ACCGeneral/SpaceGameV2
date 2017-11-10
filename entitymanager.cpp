@@ -324,7 +324,7 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
 	physicscomp->mass = 1;
 	physicscomp->maxspeed = 80.0f;
-	physicscomp->maxforce = 40.0f;
+	physicscomp->maxforce = 60.0f;
 	physicscomp->speed = 0.0f;
 	physicscomp->physicsobject = true;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
@@ -628,7 +628,7 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
 	physicscomp->mass = 1;
 	physicscomp->speed = 0.0f;
-	physicscomp->maxforce = 40.0f;
+	physicscomp->maxforce = 60.0f;
 	physicscomp->maxspeed = 80.0f;
 	physicscomp->physicsobject = true;
 	physicscomp->velocity = glm::vec3(0, 0, 0);
