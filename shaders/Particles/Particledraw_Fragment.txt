@@ -1,0 +1,35 @@
+#version 430 core
+
+uniform sampler2D gSampler;
+
+smooth in vec2 vTexCoord;
+uniform float maxlife;
+
+in float outalpha;
+out vec4 FragColor;
+
+void main()
+{
+    vec4 alphacheck = texture2D(gSampler, vTexCoord);
+    if(alphacheck.a < 0.1)
+    {
+       discard;
+    }
+    float alpha = outalpha / maxlife;
+    
+    vec3 maxcolour;
+
+	if(alpha <= 0.2)
+	{
+	   maxcolour = vec3(0.0,0.0,0.0);
+	}
+	else
+	{
+	   float newalpha = alpha - 0.2;
+	   newalpha = newalpha / 0.8;
+	   maxcolour = vec3(1,0.5,0.3) * newalpha;
+	}
+
+    FragColor = vec4(maxcolour, alpha);
+   
+}

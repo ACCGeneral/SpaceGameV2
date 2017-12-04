@@ -13,7 +13,7 @@ private:
 
 public:
 
-	AIsystem(std::shared_ptr<world> w);
+	AIsystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys);
 
 	void soiwant(std::vector<std::shared_ptr<ACC::entity>> ent);
 
@@ -25,5 +25,10 @@ public:
 	}
 
 	void doihave(std::vector<std::shared_ptr<ACC::entity>> ent);
+
+	void cleanup()
+	{
+
+	}
 
 };

@@ -1,7 +1,7 @@
 #include "Trackingboxsystem.h"
 #include "maincamera.h"
 
-Trackingboxsystem::Trackingboxsystem(std::shared_ptr<world> w) : System(w)
+Trackingboxsystem::Trackingboxsystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "Trackingboxsystem";
 }

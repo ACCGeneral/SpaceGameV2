@@ -9,6 +9,7 @@
 #include "world.h"
 #include <gtc/type_ptr.hpp>
 #include <typeinfo>
+#include "EventSystem.h"
 
 // here we have the base system class and the other systems we need for the assignment
 
@@ -19,12 +20,14 @@ namespace ACC
 	protected:
 
 		std::shared_ptr<world> myworld;
-		std::string my_System_Name;
+		std::shared_ptr<EventSystem> myEventsSystem;
 
+		std::string my_System_Name;
 	public:
 
-		System(std::shared_ptr<world> w)
+		System(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys)
 		{
+			myEventsSystem = EventSys;
 			myworld = w;
 		}
 
@@ -35,6 +38,8 @@ namespace ACC
 		virtual std::string returnname() = 0;
 
 		virtual void doihave(std::vector<std::shared_ptr<ACC::entity>> ent) = 0;
+
+		virtual void cleanup() = 0;
 
 	};
 

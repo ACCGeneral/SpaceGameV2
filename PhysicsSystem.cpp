@@ -1,7 +1,7 @@
 #include "PhysicsSystem.h"
 #include "maincamera.h"
 
-PhysicsSystsem::PhysicsSystsem(std::shared_ptr<world> w) : System(w)
+PhysicsSystsem::PhysicsSystsem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "PhysicsSystsem";
 

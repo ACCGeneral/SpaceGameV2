@@ -1,6 +1,7 @@
 #include "scene.h"
 #include "RenderSystem.h"
 #include "System.h"
+#include "EventSystem.h"
 
 void scene::updateEnts()
 {
@@ -44,8 +45,8 @@ void scene::destroyEnts()
 	myworld->returnmanager()->cleartodelete();
 }
 
-scene::scene(std::shared_ptr<SceneManager> SM) // get relevent data 
+scene::scene(std::shared_ptr<SceneManager> SM, std::shared_ptr<EventSystem> ES) // get relevent data 
 {
 	myscenemanager = SM;
-
+	EventManager = ES;
 }

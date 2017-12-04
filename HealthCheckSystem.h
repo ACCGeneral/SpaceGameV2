@@ -12,7 +12,9 @@ private:
 
 public:
 
-	HealthCheckSystem(std::shared_ptr<world> w);
+	HealthCheckSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys);
+
+	void damageevents();
 
 	void soiwant(std::vector<std::shared_ptr<ACC::entity>> ent);
 
@@ -24,5 +26,7 @@ public:
 	}
 
 	void doihave(std::vector<std::shared_ptr<ACC::entity>> ent);
+
+	void cleanup() {}
 
 };

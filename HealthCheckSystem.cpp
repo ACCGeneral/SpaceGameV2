@@ -1,9 +1,46 @@
 #include "HealthCheckSystem.h"
 #include "OctTree.h"
 
-HealthCheckSystem::HealthCheckSystem(std::shared_ptr<world> w) : System(w)
+HealthCheckSystem::HealthCheckSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "HealthCheckSystem";
+}
+
+void HealthCheckSystem::damageevents()
+{
+	std::vector<std::shared_ptr<Event>> allevents = myEventsSystem->getmyevents();
+
+	for (int i = 0; i < allevents.size(); i++)
+	{
+		if (allevents[i]->mytype == healthdamage)
+		{
+			std::shared_ptr<healthevenet> newhealthevent = std::static_pointer_cast<healthevenet>(allevents[i]);
+			std::shared_ptr<ACC::entity> healthent = myworld->returnmanager()->getentfromid(newhealthevent->takingdamageID);
+			std::shared_ptr<healthcomponent> healthE = healthent->getcomponent<healthcomponent>();
+
+			if (healthE->hitdelete.first == true)
+			{
+				healthE->hitdelete.second = true;
+			}
+			else if (newhealthevent->damagedealerID != -1)
+			{
+				std::shared_ptr<ACC::entity> damageent = myworld->returnmanager()->getentfromid(newhealthevent->damagedealerID);
+				std::shared_ptr<damagedelt> damagetodo = damageent->getcomponent<damagedelt>();
+				healthE->health -= damagetodo->damage;
+
+				std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+				newsound->mysound = damagetodo->damagesound;
+				newsound->mytype = newsound->onetime;
+				newsound->position = newhealthevent->position;
+				myworld->returnmanager()->createsound(newsound);
+			}
+		}
+
+		allevents.erase(allevents.begin() + i);
+		i--;
+	}
+
+	myEventsSystem->setevents(allevents);
 }
 
 void HealthCheckSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
@@ -20,6 +57,8 @@ void HealthCheckSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 
 void HealthCheckSystem::update(float & dt, bool & go)
 {
+	damageevents();
+
 	OctTree *root = myworld->returnoct();
 	bool removefrom = false;
 

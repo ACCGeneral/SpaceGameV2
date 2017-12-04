@@ -3,15 +3,18 @@
 #include "System.h"
 #include <vector>
 
-class AnimationSystem : public ACC::System
+class OctTree;
+
+class CollisionResolveSystem : public ACC::System
 {
+
 private:
 
-	std::vector<std::shared_ptr<ACC::entity>> animatedobjects;
+	sound physicssound;
 
 public:
 
-	AnimationSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys);
+	CollisionResolveSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys);
 
 	void soiwant(std::vector<std::shared_ptr<ACC::entity>> ent);
 
@@ -25,5 +28,4 @@ public:
 	void doihave(std::vector<std::shared_ptr<ACC::entity>> ent);
 
 	void cleanup() {}
-
 };

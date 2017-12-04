@@ -324,11 +324,17 @@
     <ClInclude Include="EventSystem.h">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
-    <ClInclude Include="SoundEvent.h">
-      <Filter>Header Files\Events</Filter>
-    </ClInclude>
     <ClInclude Include="TurretAttack.h">
       <Filter>Header Files\AI\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionResolveSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystems.h">
+      <Filter>Header Files\ECS\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -529,6 +535,9 @@
     </ClCompile>
     <ClCompile Include="TurretAttack.cpp">
       <Filter>Source Files\AI\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionResolveSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

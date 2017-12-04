@@ -8,6 +8,7 @@
 
 class SceneManager;
 class RenderSystem;
+class EventSystem;
 
 class scene : public std::enable_shared_from_this<scene>
 {
@@ -17,6 +18,7 @@ protected:
 
 	std::shared_ptr<world> myworld;
 	std::shared_ptr<SceneManager> myscenemanager;
+	std::shared_ptr<EventSystem> EventManager;
 
 	std::shared_ptr<RenderSystem> myRenderSystem;
 	std::vector<std::shared_ptr<ACC::System>> myupdatesystems;
@@ -26,7 +28,7 @@ protected:
 
 public:
 
-	scene(std::shared_ptr<SceneManager> SM);
+	scene(std::shared_ptr<SceneManager> SM, std::shared_ptr<EventSystem> ES);
 	virtual void init() = 0;
 	virtual void update(float dt, bool &go) = 0;
 	virtual void draw(float dt) = 0;

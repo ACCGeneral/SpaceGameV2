@@ -18,8 +18,9 @@
 #include "lifetimesystem.h"
 #include "HealthCheckSystem.h"
 #include "TargetingSystem.h"
+#include "CollisionResolveSystem.h"
 
-MainGame::MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman) : scene(Sman)
+MainGame::MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman, std::shared_ptr<EventSystem> ES) : scene(Sman,ES)
 {
 	myworld = std::make_shared<world>(myman);
 	SDL_ShowCursor(SDL_DISABLE);
@@ -55,21 +56,22 @@ void MainGame::init()
 	themainlight->setlightcolour(glm::vec3(1.0, 1.0, 1.0));
 	myworld->returnmanager()->create_directionlight(themainlight);
 
-	myRenderSystem = std::make_shared<RenderSystem>(myworld);
-	myupdatesystems.push_back(std::make_shared<SoundSystem>(myworld,0.2f));
-	myupdatesystems.push_back(std::make_shared<PlayerSystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<AIsystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<FireSystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<PhysicsSystsem>(myworld));
-	myupdatesystems.push_back(std::make_shared<BoxIconSystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<Trackingboxsystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<HealthDisplaySystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<TargetingSystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<CollisionSystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<AnimationSystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<modelmatrixsystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<lifetimesystem>(myworld));
-	myupdatesystems.push_back(std::make_shared<HealthCheckSystem>(myworld));
+	myRenderSystem = std::make_shared<RenderSystem>(myworld, EventManager);
+	myupdatesystems.push_back(std::make_shared<SoundSystem>(myworld,0.2f, EventManager));
+	myupdatesystems.push_back(std::make_shared<PlayerSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<AIsystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<FireSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<PhysicsSystsem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<BoxIconSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<Trackingboxsystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<HealthDisplaySystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<TargetingSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<CollisionSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<CollisionResolveSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<AnimationSystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<modelmatrixsystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<lifetimesystem>(myworld, EventManager));
+	myupdatesystems.push_back(std::make_shared<HealthCheckSystem>(myworld, EventManager));
 	
 
 	updateEnts();
@@ -139,6 +141,7 @@ void MainGame::exit()
 		myupdatesystems.erase(myupdatesystems.begin() + i);
 		i--;
 	}
+
 
 }
 

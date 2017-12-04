@@ -1,6 +1,6 @@
 #include "AIsystem.h"
 
-AIsystem::AIsystem(std::shared_ptr<world> w) : System(w)
+AIsystem::AIsystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w,EventSys)
 {
 	my_System_Name = "AIsystem";
 

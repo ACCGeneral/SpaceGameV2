@@ -1,0 +1,25 @@
+#version 430 core
+
+layout (location = 0) in vec3 vPosition;
+layout (location = 1) in vec3 vVelocity;
+layout (location = 2) in float fLifeTime;
+layout (location = 3) in float fSize;
+layout (location = 4) in int iType;
+layout (location = 5) in vec3 vRandseed;
+
+out vec3 vPositionPass;
+out vec3 vVelocityPass;
+out float fLifeTimePass;
+out float fSizePass;
+out int iTypePass;
+out vec3 vRandPass;
+
+void main()
+{
+  vPositionPass = vPosition;
+  vVelocityPass = vVelocity;
+  fLifeTimePass = fLifeTime;
+  fSizePass = fSize;
+  iTypePass = iType;
+  vRandPass = vRandseed;
+}

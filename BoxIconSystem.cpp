@@ -1,7 +1,7 @@
 #include "BoxIconSystem.h"
 #include "maincamera.h"
 
-BoxIconSystem::BoxIconSystem(std::shared_ptr<world> w) : System(w)
+BoxIconSystem::BoxIconSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "BoxIconSystem";
 }

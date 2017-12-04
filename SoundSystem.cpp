@@ -1,6 +1,6 @@
 #include "SoundSystem.h"
 
-SoundSystem::SoundSystem(std::shared_ptr<world> w, float vol) : System(w)
+SoundSystem::SoundSystem(std::shared_ptr<world> w, float vol, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "SoundSystem";
 	volume = vol;

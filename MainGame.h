@@ -4,23 +4,21 @@
 #include "TextManager.h"
 #include "spawnsystem.h"
 
+class OctTree;
 
 class MainGame : public scene
 {
 private:
 
-	
 	spawnsystem myspawnsystem;
-
 	std::shared_ptr<healthcomponent> allycapship;
 	std::shared_ptr<healthcomponent> enemycapship;
-
 	float wantedFPS;
 
 public:
 
 
-	MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman);
+	MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman, std::shared_ptr<EventSystem> ES);
 	void init();
 	void update(float dt, bool &go);
 	void draw(float dt);

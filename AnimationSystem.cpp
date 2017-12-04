@@ -1,6 +1,6 @@
 #include "AnimationSystem.h"
 
-AnimationSystem::AnimationSystem(std::shared_ptr<world> w) : System(w)
+AnimationSystem::AnimationSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "AnimationSystem";
 

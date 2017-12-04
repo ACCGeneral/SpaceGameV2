@@ -179,7 +179,6 @@ void Resourecmanager::shaderinit() //create all of our shaders that we might nee
 	healthshader->linkcheck();
 	addshader(healthshader, "healthshader");
 
-
 }
 
 void Resourecmanager::soundsinit()

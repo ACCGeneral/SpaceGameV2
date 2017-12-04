@@ -1,7 +1,7 @@
 #include "lifetimesystem.h"
 #include "OctTree.h"
 
-lifetimesystem::lifetimesystem(std::shared_ptr<world> w) : System(w)
+lifetimesystem::lifetimesystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "lifetimesystem";
 

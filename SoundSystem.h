@@ -12,7 +12,7 @@ private:
 
 public:
 
-	SoundSystem(std::shared_ptr<world> w, float vol);
+	SoundSystem(std::shared_ptr<world> w, float vol, std::shared_ptr<EventSystem> EventSys);
 
 	void soiwant(std::vector<std::shared_ptr<ACC::entity>> ent);
 
@@ -25,5 +25,5 @@ public:
 
 	void doihave(std::vector<std::shared_ptr<ACC::entity>> ent);
 
-
+	void cleanup() {}
 };

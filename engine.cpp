@@ -80,11 +80,13 @@ void ACC::engine::init() //define what we need for our engine
 	TextManager::instance().setshader(Resourecmanager::instance().getfromshadholder("textshader"));
 	TextManager::instance().setup();
 
+	Eventsmanager = std::make_shared<EventSystem>();
+
 	srand(time(NULL));
 	go = true;
 	myentman = std::make_shared<entitymanager>();
 	sceneMan = std::make_shared<SceneManager>(); //set our scene
-	sceneMan->addstate(std::make_shared<MainGame>(sceneMan->getself(), myentman));
+	sceneMan->addstate(std::make_shared<MainGame>(sceneMan->getself(), myentman, Eventsmanager));
 	sceneMan->init();
 	frametimelast = SDL_GetTicks();
 	framespersecond = 0;

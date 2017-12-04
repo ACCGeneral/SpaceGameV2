@@ -1,6 +1,6 @@
 #include "FireSystem.h"
 
-FireSystem::FireSystem(std::shared_ptr<world> w) : System(w)
+FireSystem::FireSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "FireSystem";
 

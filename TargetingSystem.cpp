@@ -1,6 +1,6 @@
 #include "TargetingSystem.h"
 
-TargetingSystem::TargetingSystem(std::shared_ptr<world> w) : System(w)
+TargetingSystem::TargetingSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "TargetingSystem";
 

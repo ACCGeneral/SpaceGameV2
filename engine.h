@@ -36,7 +36,7 @@ namespace ACC
 
 		int frametimelast;
 		int framespersecond;
-		std::shared_ptr<EventSystem> Events;
+		std::shared_ptr<EventSystem> Eventsmanager;
 
 	public:
 
