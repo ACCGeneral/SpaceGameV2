@@ -73,6 +73,12 @@
     <Filter Include="Header Files\Events">
       <UniqueIdentifier>{be991cc5-eb6d-4309-80e4-8981f9bd92c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ParticleSystems">
+      <UniqueIdentifier>{fd949878-3250-46d5-b583-1b3e22ebb49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ParticleSystems">
+      <UniqueIdentifier>{3d1dd356-f9a7-4503-877d-9957e20ed0ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -333,8 +339,8 @@
     <ClInclude Include="CollisionResolveSystem.h">
       <Filter>Header Files\ECS\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystems.h">
-      <Filter>Header Files\ECS\Systems</Filter>
+    <ClInclude Include="particleSphereGen.h">
+      <Filter>Header Files\ParticleSystems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="CollisionResolveSystem.cpp">
       <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="particleSphereGen.cpp">
+      <Filter>Source Files\ParticleSystems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

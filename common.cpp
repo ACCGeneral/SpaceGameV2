@@ -77,3 +77,24 @@ void load_ogg(std::string fileName, std::vector<char>& buffer, ALenum & format, 
 	ov_clear(&oggFile);
 
 }
+
+
+glm::vec3 getrandomwvec3(float minval, float addition)
+{
+	float x = float(rand() % (RAND_MAX + 1)) / float(RAND_MAX);
+	float y = float(rand() % (RAND_MAX + 1)) / float(RAND_MAX);
+	float z = float(rand() % (RAND_MAX + 1)) / float(RAND_MAX);
+
+	x = minval + addition*x;
+	y = minval + addition*y;
+	z = minval + addition*z;
+
+	return glm::vec3(x, y, z);
+}
+
+float getrandomwfloat(float minval, float addition)
+{
+	float x = float(rand() % (RAND_MAX + 1)) / float(RAND_MAX);
+	x = minval + addition*x;
+	return x;
+}
