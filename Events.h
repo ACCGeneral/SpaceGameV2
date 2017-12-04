@@ -1,7 +1,9 @@
 #pragma once
 
 #include <glm.hpp>
+#include "particleExplotionData.h"
 #include "sound.h"
+
 
 enum eventtype {healthdamage, explotion, Sound, dead_collision};
 
@@ -39,8 +41,7 @@ struct explostionEvent : public Event
 		mytype = explotion;
 	}
 
-	glm::vec3 postion;
-	float rad;
+	particleExplotionData explotionData;
 };
 
 struct soundEvent : public Event

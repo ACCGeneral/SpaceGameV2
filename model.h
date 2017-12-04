@@ -4,17 +4,14 @@
 #include "mesh.h"
 #include <string>
 #include <memory>
-#include <SOIL.h>
 #include "shader.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "common.h"
 
 //reference to https://learnopengl.com/#!Model-Loading/Model
 //assimp draw data 
-
-GLint TextureFromFile(const char* path, std::string directory);
-GLint cubmaploader(std::string directory, std::vector<std::string> loaded_texture);
 
 class model
 {

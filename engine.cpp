@@ -77,6 +77,7 @@ void ACC::engine::init() //define what we need for our engine
 	Resourecmanager::instance().obbinit();
 	Resourecmanager::instance().shaderinit();
 	Resourecmanager::instance().soundsinit();
+	Resourecmanager::instance().textureInit();
 	TextManager::instance().setshader(Resourecmanager::instance().getfromshadholder("textshader"));
 	TextManager::instance().setup();
 

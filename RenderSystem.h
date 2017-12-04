@@ -12,6 +12,7 @@ private:
 	std::vector<std::shared_ptr<ACC::entity>> modelents;
 	std::vector<std::shared_ptr<ACC::entity>> backdraw;
 	std::vector<std::shared_ptr<ACC::entity>> lights;
+	std::vector<std::shared_ptr<ACC::entity>> particles;
 
 
 public:

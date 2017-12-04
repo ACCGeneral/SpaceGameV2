@@ -1,5 +1,6 @@
 #include "RenderSystem.h"
 #include "maincamera.h"
+#include "particleSphereGen.h"
 
 RenderSystem::RenderSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
@@ -33,6 +34,11 @@ void RenderSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 			}
 
 		}
+		else if (ent[i]->doihave(particalemmiter::TypeID))
+		{
+			particles.push_back(ent[i]);
+		}
+		
 	}
 
 
@@ -110,6 +116,12 @@ void RenderSystem::update(float & dt, bool & go) //render all of our entities
 			entitymodel->myshader->stopProgram(); //unlink shader 
 		}
 
+	}
+
+	for (int i = 0; i < particles.size(); i++)
+	{
+		std::shared_ptr<particalemmiter> particleEmit = particles[i]->getcomponent<particalemmiter>();
+		particleEmit->particleemitter->updateall(dt);
 	}
 
 	glEnable(GL_DEPTH_TEST); //reset

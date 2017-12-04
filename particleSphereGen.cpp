@@ -16,25 +16,10 @@ bool ParticleSphereGen::InitalizeParticleSystem(GLuint texture, int genamount)
 		"vRandomOut"
 	};
 
-	int test = sizeof(int);
-
-	updateshader = std::make_shared<shader>();
-	rendershader = std::make_shared<shader>();
-
-	updateshader->loadshader("shaders\\SphereGenShader\\ParticledataVertex.txt", GL_VERTEX_SHADER);
-	updateshader->loadshader("shaders\\SphereGenShader\\ParticlecreationGeomarty.txt", GL_GEOMETRY_SHADER);
 	for (int i = 0; i < NUM_PARTICLE_ATTRIBUTES; i++)
 	{
 		glTransformFeedbackVaryings(updateshader->returnprogram(), NUM_PARTICLE_ATTRIBUTES, sVaryings, GL_INTERLEAVED_ATTRIBS); // Tells OpenGL which attributes should transform feedback record
 	}
-	updateshader->linkshader();
-	updateshader->linkcheck();
-
-	rendershader->loadshader("shaders\\SphereGenShader\\Particledraw_Vertex.txt", GL_VERTEX_SHADER);
-	rendershader->loadshader("shaders\\SphereGenShader\\Particledraw_Geomatry.txt", GL_GEOMETRY_SHADER);
-	rendershader->loadshader("shaders\\SphereGenShader\\Particledraw_Fragment.txt", GL_FRAGMENT_SHADER);
-	rendershader->linkshader();
-	rendershader->linkcheck();
 
 	glGenTransformFeedbacks(1, &uiTransformFeedbackBuffer); // Generates transform feedback object
 	glGenQueries(1, &uiQuery); // Generates a general query object, in our case we use it to determine number of emitted particles
@@ -193,7 +178,6 @@ bool ParticleSphereGen::ReleaseParticleSystem()
 {
 	glDeleteBuffers(2, &uiParticleBuffer[0]);
 	glDeleteVertexArrays(2, &uiVAO[0]);
-
 
 	return true;
 }

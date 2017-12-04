@@ -4,6 +4,8 @@
 #include <gtc/type_ptr.hpp>
 #include <memory>
 #include "shader.h"
+#include "particleExplotionData.h"
+
 
 #define NUM_PARTICLE_ATTRIBUTES 6
 #define MAX_PARTICLES_ON_SCENE 100000
@@ -74,16 +76,16 @@ public:
 
 	bool InitalizeParticleSystem(GLuint texture, int genamount);
 
-	void SetGeneratorProperties(glm::vec3 a_vGenPosition, float a_fGenLifeMin, float a_fGenLifeMax, float a_fGenSize, float fEvery, int a_iNumToGenerate, float rad, int maxcy)
+	void SetGeneratorProperties(particleExplotionData mydata)
 	{
-		vGenPosition = a_vGenPosition;
-		fGenLifeMin = a_fGenLifeMin;
-		fGenLifeRange = a_fGenLifeMax;
-		fGenSize = a_fGenSize;
-		fNextGenerationTime = fEvery;
-		iNumToGenerate = a_iNumToGenerate;
-		radious = rad;
-		maxcycles = maxcy;
+		vGenPosition = mydata.pos;
+		fGenLifeMin = mydata.minLife;
+		fGenLifeRange = mydata.maxAddedLife;
+		fGenSize = mydata.particleSize;
+		fNextGenerationTime = mydata.spawnEvery;
+		iNumToGenerate = mydata.numberToGen;
+		radious = mydata.radious;
+		maxcycles = mydata.maxCycles;
 	}
 
 	void ClearAllParticles();
@@ -117,6 +119,12 @@ public:
 		{
 			return false;
 		}
+	}
+
+	void getshader(std::shared_ptr<shader> ren, std::shared_ptr<shader> upD)
+	{
+		rendershader = ren;
+		updateshader = upD;
 	}
 
 

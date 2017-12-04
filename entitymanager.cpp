@@ -1,4 +1,5 @@
 #include "entitymanager.h"
+#include "particleSphereGen.h"
 
 //we assign components to our needed entities 
 
@@ -1390,6 +1391,21 @@ void entitymanager::createsound(std::shared_ptr<soundComponet> soundcomp)
 
 	entities[sound->returnID()] = sound;
 	tooadd.push_back(sound);
+}
+
+void entitymanager::createExplotionParticleEffect(particleExplotionData explotiondata)
+{
+	std::shared_ptr<ACC::entity> explotion = std::make_shared<ACC::entity>(IDs.getID(), enttypes::ExplotionEffect);
+
+	std::shared_ptr<particalemmiter> emitter = std::make_shared<particalemmiter>();
+	emitter->particleemitter = std::make_shared<ParticleSphereGen>();
+	emitter->particleemitter->getshader(Resourecmanager::instance().getfromshadholder("particleRender"), Resourecmanager::instance().getfromshadholder("particleUpdate"));
+	emitter->particleemitter->SetGeneratorProperties(explotiondata);
+	emitter->particleemitter->InitalizeParticleSystem(Resourecmanager::instance().getFromTextureHolder("Fire_Particle")->mytexture,explotiondata.generators);
+
+	explotion->addcomponent(emitter);
+	entities[explotion->returnID()] = explotion;
+	tooadd.push_back(explotion);
 }
 
 

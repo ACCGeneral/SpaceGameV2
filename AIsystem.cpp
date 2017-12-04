@@ -60,7 +60,6 @@ void AIsystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 			if (AIobjects[i] == ents[j])
 			{
 				std::cout << "dead \n";
-
 				AIman.removefromlist(AIobjects[i]);
 				AIobjects.erase(AIobjects.begin() + i);
 				ents.erase(ents.begin() + j);

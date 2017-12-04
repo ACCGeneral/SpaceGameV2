@@ -17,6 +17,11 @@ std::shared_ptr<model> Resourecmanager::getfrommodelholder(std::string name) //g
 	return modholder.getmode(name);
 }
 
+std::shared_ptr<texture> Resourecmanager::getFromTextureHolder(std::string name)
+{
+	return myTextureHolder.getTexture(name);
+}
+
 AABB Resourecmanager::getAABB(std::string name) //get the aabb data for a model
 {
 	return modholder.getAABB(name);
@@ -66,6 +71,11 @@ void Resourecmanager::abbobb(std::string filename, std::string name)
 void Resourecmanager::addsound(sound newsound, std::string name)
 {
 	mysoundholder.addsound(newsound, name);
+}
+
+void Resourecmanager::addTexture(std::string texturePath, std::string textureName, std::string getName)
+{
+	myTextureHolder.addtexture(texturePath, textureName, getName);
 }
 
 void Resourecmanager::modelsinit() //create all of our models that we might need 
@@ -179,6 +189,23 @@ void Resourecmanager::shaderinit() //create all of our shaders that we might nee
 	healthshader->linkcheck();
 	addshader(healthshader, "healthshader");
 
+	std::shared_ptr<shader> particleRenderShader;
+	particleRenderShader = std::make_shared<shader>();
+	particleRenderShader->loadshader("shaders//Particles//Particledraw_Vertex.txt", GL_VERTEX_SHADER);
+	particleRenderShader->loadshader("shaders//Particles//Particledraw_Geomatry.txt", GL_GEOMETRY_SHADER);
+	particleRenderShader->loadshader("shaders//Particles//Particledraw_Fragment.txt", GL_FRAGMENT_SHADER);
+	particleRenderShader->linkshader();
+	particleRenderShader->linkcheck();
+	addshader(particleRenderShader, "particleRender");
+
+	std::shared_ptr<shader> particleUpdateShader;
+	particleUpdateShader = std::make_shared<shader>();
+	particleUpdateShader->loadshader("shaders//Particles//ParticledataVertex.txt", GL_VERTEX_SHADER);
+	particleUpdateShader->loadshader("shaders//Particles//ParticlecreationGeomarty.txt", GL_GEOMETRY_SHADER);
+	particleUpdateShader->linkshader();
+	particleUpdateShader->linkcheck();
+	addshader(particleUpdateShader, "particleUpdate");
+
 }
 
 void Resourecmanager::soundsinit()
@@ -207,6 +234,12 @@ void Resourecmanager::soundsinit()
 	mainmusic.setup("Sounds//MainSong.ogg");
 	mysoundholder.addsound(mainmusic, "MainMusic");
 
+
+}
+
+void Resourecmanager::textureInit()
+{
+	addTexture("fire_particle_uv.png","Textures\\Fire_Particle","Fire_Particle");
 
 }
 

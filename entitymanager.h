@@ -12,6 +12,7 @@
 #include "healthsettings.h"
 #include "orthographicsettings.h"
 #include "uisettings.h"
+#include "particleExplotionData.h"
 
 
 // the entity manager for creating and holding entities
@@ -56,6 +57,7 @@ public:
 
 	void createsound(std::shared_ptr<soundComponet> soundcomp);
 
+	void createExplotionParticleEffect(particleExplotionData explotiondata);
 
 	entitymanager();
 

@@ -22,6 +22,7 @@ namespace enttypes
 		Spotlight,
 		AllyCapIcon,
 		EnemyCapIcon,
-		Sound
+		Sound,
+		ExplotionEffect
 	};
 }

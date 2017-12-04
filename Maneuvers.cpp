@@ -4,10 +4,10 @@
 maneuvers::maneuvers()
 {
 	maneuver lefttoright;
-	lefttoright.manpos = std::vector<glm::vec3>{ glm::vec3(0.4,0.3,1),glm::vec3(-0.4, -0.3, 1),glm::vec3(0.4, 0, 1) };
+	lefttoright.manpos = std::vector<glm::vec3>{ glm::vec3(0.7,0.3,1),glm::vec3(-0.7, -0.3, 1),glm::vec3(0.7, 0, 1) };
 	lefttoright.roll = std::vector<float>{ 90.0f,-90.0f,0.0f };
-	lefttoright.time = std::vector<float>{ 2.0f,2.0f,2.0f };
-	lefttoright.fulltime = 2.0f + 2.0f + 2.0f;
+	lefttoright.time = std::vector<float>{ 4.0f,4.0f,4.0f };
+	lefttoright.fulltime = 4.0f + 4.0f + 4.0f;
 
 	std::pair<maneuver, std::string> newpair;
 	newpair.first = lefttoright;
@@ -33,10 +33,10 @@ maneuvers::maneuvers()
 	mymaneuver.push_back(newpair);
 
 	maneuver smalllefttoright;
-	smalllefttoright.manpos = std::vector<glm::vec3>{glm::vec3(0.4,0.2,1.0),glm::vec3(-0.4,-0.2,1.0) };
+	smalllefttoright.manpos = std::vector<glm::vec3>{glm::vec3(1.0,0.2,1.0),glm::vec3(-1.0,-0.2,1.0) };
 	smalllefttoright.roll = std::vector<float>{ 90.0f,270.0f};
-	smalllefttoright.time = std::vector<float>{3.0f,3.0f};
-	smalllefttoright.fulltime = 3.0f + 3.0f;
+	smalllefttoright.time = std::vector<float>{2.5f,2.5f};
+	smalllefttoright.fulltime = 2.5f + 2.5f;
 	newpair.first = smalllefttoright;
 	newpair.second = "smalllefttoright";
 	mymaneuver.push_back(newpair);

@@ -3,20 +3,21 @@
 #include <glm.hpp>
 #include "glew.h"
 #include <vector>
-#include "shader.h"
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
-#include "Light.h"
-#include "dirlight.h"
 #include <memory>
-#include "model.h"
-#include "OBB.h"
-#include "AABB.h"
-#include "shadersettings.h"
-#include "action.h"
-#include "Sphere.h"
 #include "sound.h"
 #include "movementcontroller.h"
+#include "action.h"
+
+class ParticleSphereGen;
+class light;
+class OBB;
+class AABB;
+class sphere;
+class shader;
+class model;
+class shadersettings;
 
 //here is a list of all of our components that we need for the game and the demo. every component is based of the base class ACC:component 
 //For use components only contain data while systems do the needed logic
@@ -117,17 +118,16 @@ public:
 	healthcomponent()
 	{
 		deathsound.second = false;
+		explotionondeath = false;
 	}
 
 	static const int TypeID = 5;
 
 	float health;
-
 	float maxhp;
-
+	std::pair<bool, bool> hitdelete;
 	std::pair<sound,bool> deathsound;
-
-	std::pair<bool,bool> hitdelete;
+	bool explotionondeath;
 
 	int GetType() const { return TypeID; };
 
@@ -533,6 +533,8 @@ class particalemmiter : public ACC::component
 public:
 	static const int TypeID = 27;
 	int GetType() const { return TypeID; };
+
+	std::shared_ptr<ParticleSphereGen> particleemitter;
 
 };
 

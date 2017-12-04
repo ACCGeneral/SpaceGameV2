@@ -8,6 +8,7 @@
 #include <string>
 #include "glew.h"
 #include <glm.hpp>
+#include <SOIL.h>
 
 //common function to check shader binding
 
@@ -20,4 +21,8 @@ void load_ogg(std::string fileName, std::vector<char> &buffer,
 glm::vec3 getrandomwvec3(float minval, float addition);
 
 float getrandomwfloat(float minval, float addition);
+
+GLint TextureFromFile(const char* path, std::string directory);
+
+GLint cubmaploader(std::string directory, std::vector<std::string> loaded_texture);
 

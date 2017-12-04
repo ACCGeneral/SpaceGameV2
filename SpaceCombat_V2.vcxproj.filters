@@ -342,6 +342,15 @@
     <ClInclude Include="particleSphereGen.h">
       <Filter>Header Files\ParticleSystems</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Header Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="particleExplotionData.h">
+      <Filter>Header Files\ParticleSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureHolder.h">
+      <Filter>Header Files\Models and sounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common.cpp">
@@ -547,6 +556,12 @@
     </ClCompile>
     <ClCompile Include="particleSphereGen.cpp">
       <Filter>Source Files\ParticleSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureHolder.cpp">
+      <Filter>Source Files\Models and sounds</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

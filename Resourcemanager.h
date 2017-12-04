@@ -4,7 +4,7 @@
 #include "modelholder.h"
 #include "OBBholder.h"
 #include "soundholder.h"
-
+#include "TextureHolder.h"
 
 //our resource manager for all shaders,models and textures. 
 
@@ -15,6 +15,7 @@ private:
 	modelholder modholder;
 	OBBholder myOBBholder;
 	soundholder mysoundholder;
+	textureHolder myTextureHolder;
 
 public:
 
@@ -22,6 +23,7 @@ public:
 
 	std::shared_ptr<shader> getfromshadholder(std::string name);
 	std::shared_ptr<model> getfrommodelholder(std::string name);
+	std::shared_ptr<texture> getFromTextureHolder(std::string name);
 	AABB getAABB (std::string name);
 	OBB getOBBfrommodel(std::string name);
 	sphere getsphere(std::string name);
@@ -34,11 +36,12 @@ public:
 	void addskybox(std::vector<std::string> cube, std::string modelpath, std::string modelname);
 	void abbobb(std::string filename, std::string name);
 	void addsound(sound newsound, std::string name);
+	void addTexture(std::string texturePath, std::string textureName,std::string getName);
 
 
 	void modelsinit();
 	void obbinit();
 	void shaderinit();
 	void soundsinit();
-
+	void textureInit();
 };
