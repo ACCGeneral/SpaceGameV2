@@ -16,10 +16,24 @@ bool ParticleSphereGen::InitalizeParticleSystem(GLuint texture, int genamount)
 		"vRandomOut"
 	};
 
+	updateshader = std::make_shared<shader>();
+	rendershader = std::make_shared<shader>();
+
+	updateshader->loadshader("shaders\\Particles\\ParticledataVertex.txt", GL_VERTEX_SHADER);
+	updateshader->loadshader("shaders\\Particles\\ParticlecreationGeomarty.txt", GL_GEOMETRY_SHADER);
 	for (int i = 0; i < NUM_PARTICLE_ATTRIBUTES; i++)
 	{
 		glTransformFeedbackVaryings(updateshader->returnprogram(), NUM_PARTICLE_ATTRIBUTES, sVaryings, GL_INTERLEAVED_ATTRIBS); // Tells OpenGL which attributes should transform feedback record
 	}
+	updateshader->linkshader();
+	updateshader->linkcheck();
+
+	rendershader->loadshader("shaders\\Particles\\Particledraw_Vertex.txt", GL_VERTEX_SHADER);
+	rendershader->loadshader("shaders\\Particles\\Particledraw_Geomatry.txt", GL_GEOMETRY_SHADER);
+	rendershader->loadshader("shaders\\Particles\\Particledraw_Fragment.txt", GL_FRAGMENT_SHADER);
+	rendershader->linkshader();
+	rendershader->linkcheck();
+
 
 	glGenTransformFeedbacks(1, &uiTransformFeedbackBuffer); // Generates transform feedback object
 	glGenQueries(1, &uiQuery); // Generates a general query object, in our case we use it to determine number of emitted particles
@@ -77,7 +91,7 @@ void ParticleSphereGen::RenderParticles()
 		return;
 	}
 
-	glEnable(GL_BLEND);
+	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glDisable(GL_CULL_FACE);
 	glDepthMask(0);
@@ -93,7 +107,7 @@ void ParticleSphereGen::RenderParticles()
 	glUniformMatrix4fv(glGetUniformLocation(rendershader->returnprogram(), "matrices.mProj"), 1, GL_FALSE, glm::value_ptr(matProjection));
 	glUniformMatrix4fv(glGetUniformLocation(rendershader->returnprogram(), "matrices.mView"), 1, GL_FALSE, glm::value_ptr(matView));
 	glUniform1f(glGetUniformLocation(rendershader->returnprogram(), "gSampler"), 0);
-	glUniform1f(glGetUniformLocation(rendershader->returnprogram(), "maxlife"), fGenLifeMin+ fGenLifeRange);
+	glUniform1f(glGetUniformLocation(rendershader->returnprogram(), "maxlife"), fGenLifeMin + fGenLifeRange);
 
 	glUniform1f(glGetUniformLocation(rendershader->returnprogram(), "sizechange"), fGenLifeMin + fGenLifeRange);
 
@@ -103,9 +117,9 @@ void ParticleSphereGen::RenderParticles()
 	glDrawArrays(GL_POINTS, 0, iNumParticles);
 
 	glDepthMask(1);
-	glDisable(GL_BLEND);
+	
 	glEnable(GL_CULL_FACE);
-
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void ParticleSphereGen::UpdateParticles(float dt)
@@ -191,6 +205,7 @@ ParticleSphereGen::ParticleSphereGen()
 {
 	currentcycles = 0;
 	startgen = false;
+	bInitialized = false;
 }
 
 

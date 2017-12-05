@@ -94,6 +94,16 @@ public:
    {
 	   deleteme->setdeleteme();
 	   todelete.push_back(deleteme);
+
+	   if (deleteme->doihave(thingsiown::TypeID))
+	   {
+		   std::shared_ptr<thingsiown> mythings = deleteme->getcomponent<thingsiown>();
+
+		   for (int i = 0; i < mythings->stuffiown.size(); i++)
+		   {
+			   addtodeletelist(mythings->stuffiown[i]);
+		   }
+	   }
    }
 
 };

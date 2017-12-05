@@ -48,9 +48,11 @@ float randZeroOne()
     return fRes;
 }
 
+
+
 void main()
 {
-  vLocalSeed = vRandomSeed + vRandomOut;
+  vLocalSeed = vRandomOut + vRandomSeed;
   
   float pi = 3.1415926535897;
 
@@ -81,7 +83,7 @@ void main()
       float rad = radious * randZeroOne();
       parpos = parpos * rad;
       vec3 parvel = parpos - vec3(0,0,0);
-      vVelocityOut = normalize(parvel) * randZeroOne();
+      vVelocityOut = normalize(parvel) * 2;
       vPositionOut = vGenPosition + parpos;
       fLifeTimeOut = fGenLifeMin+fGenLifeRange*randZeroOne();
       fSizeOut = fGenSize;

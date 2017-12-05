@@ -17,6 +17,7 @@ TextManager::TextManager()
 
 void TextManager::rendertext(std::string texttoren, glm::vec3 colour, GLfloat x, GLfloat y, float scale)
 {
+
 	// Activate corresponding render state	
 	textsharder->useProgram();
 	glUniform3f(glGetUniformLocation(textsharder->returnprogram(), "textcolour"), colour.x, colour.y, colour.z);

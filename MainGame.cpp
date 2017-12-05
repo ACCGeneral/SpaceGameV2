@@ -19,6 +19,7 @@
 #include "HealthCheckSystem.h"
 #include "TargetingSystem.h"
 #include "CollisionResolveSystem.h"
+#include "ParticleSystem.h"
 
 MainGame::MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman, std::shared_ptr<EventSystem> ES) : scene(Sman,ES)
 {
@@ -72,7 +73,8 @@ void MainGame::init()
 	myupdatesystems.push_back(std::make_shared<modelmatrixsystem>(myworld, EventManager));
 	myupdatesystems.push_back(std::make_shared<lifetimesystem>(myworld, EventManager));
 	myupdatesystems.push_back(std::make_shared<HealthCheckSystem>(myworld, EventManager));
-	
+	myupdatesystems.push_back(std::make_shared<ParticleSystem>(myworld, EventManager));
+
 
 	updateEnts();
 	myworld->getmaincam()->setProjection(glm::perspective(glm::radians(52.0f), (float)1280.0f / (float)720.0f, 0.1f, 10000.0f));

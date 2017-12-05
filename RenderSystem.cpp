@@ -46,8 +46,6 @@ void RenderSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 
 void RenderSystem::update(float & dt, bool & go) //render all of our entities 
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	int spotlightnum = 0;
 	int dirlightnum = 0;
@@ -56,6 +54,9 @@ void RenderSystem::update(float & dt, bool & go) //render all of our entities
 	std::vector<std::shared_ptr<ACC::entity>> entstorender;
 	entstorender.insert(entstorender.end(), modelents.begin(), modelents.end()); // normal entities render first 
 	entstorender.insert(entstorender.end(), backdraw.begin(), backdraw.end()); //render no depth entities last (drawing order matters for these)
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (auto models : entstorender)
 	{
@@ -118,13 +119,13 @@ void RenderSystem::update(float & dt, bool & go) //render all of our entities
 
 	}
 
+	glEnable(GL_DEPTH_TEST); //reset
+
 	for (int i = 0; i < particles.size(); i++)
 	{
 		std::shared_ptr<particalemmiter> particleEmit = particles[i]->getcomponent<particalemmiter>();
 		particleEmit->particleemitter->updateall(dt);
 	}
-
-	glEnable(GL_DEPTH_TEST); //reset
 
 }
 
@@ -144,7 +145,6 @@ void RenderSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 			}
 		}
 	}
-
 
 	for (int i = 0; i <	modelents.size(); i++)
 	{
@@ -166,7 +166,6 @@ void RenderSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 		}
 	}
 
-
 	for (int i = 0; i < backdraw.size(); i++)
 	{
 		for (int j = 0; j < ents.size(); j++)
@@ -184,6 +183,28 @@ void RenderSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 		if (ents.size() == 0)
 		{
 			return;
+		}
+	}
+
+	for (int i = 0; i < particles.size(); i++)
+	{
+		for (int j = 0; j < ents.size(); j++)
+		{
+			if (particles[i] == ents[j])
+			{
+				std::shared_ptr<particalemmiter> particleEmit = particles[i]->getcomponent<particalemmiter>();
+				particleEmit->particleemitter->ReleaseParticleSystem();
+
+				particles.erase(particles.begin() + i);
+				ents.erase(ents.begin() + j);
+				j--;
+				i--;
+				break;
+			}
+		}
+		if (ents.size() == 0)
+		{
+			break;
 		}
 	}
 

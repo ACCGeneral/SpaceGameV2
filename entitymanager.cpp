@@ -116,6 +116,7 @@ void entitymanager::createplayer(glm::vec3 pos)
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	player->addcomponent(health);
 
 	std::shared_ptr<playercomp> playercom = std::make_shared<playercomp>();
@@ -216,6 +217,7 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	enemyfighter->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -320,6 +322,7 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	enemeybomber->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -445,6 +448,7 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	EnemyCapital->addcomponent(health);
 
 	std::shared_ptr<teamcomponent> teamcomp = std::make_shared<teamcomponent>();
@@ -476,13 +480,13 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 	trackerboxent(EnemyCapital, false);
 	healthbar(EnemyCapital, glm::vec3(15, 0.5, 1), glm::vec3(0, 10, 0), false);
 
-	createCapTurret(EnemyCapital, false, glm::vec3(5.083, 3.342, -11.770));
-	createCapTurret(EnemyCapital, false, glm::vec3(5.083,3.342,-0.523));
-	createCapTurret(EnemyCapital, false, glm::vec3(5.083, 3.342, 9.472));
+	createCapTurret(EnemyCapital, false, glm::vec3(5.083, 3.5, -11.770));
+	createCapTurret(EnemyCapital, false, glm::vec3(5.083, 3.5,-0.523));
+	createCapTurret(EnemyCapital, false, glm::vec3(5.083, 3.5, 9.472));
 
-	createCapTurret(EnemyCapital, false, glm::vec3(-5.083, 3.342, -11.770));
-	createCapTurret(EnemyCapital, false, glm::vec3(-5.083, 3.342, -0.523));
-	createCapTurret(EnemyCapital, false, glm::vec3(-5.083, 3.342, 9.472));
+	createCapTurret(EnemyCapital, false, glm::vec3(-5.083, 3.5, -11.770));
+	createCapTurret(EnemyCapital, false, glm::vec3(-5.083, 3.5, -0.523));
+	createCapTurret(EnemyCapital, false, glm::vec3(-5.083, 3.5, 9.472));
 
 	return health;
 
@@ -520,6 +524,7 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	AllyFighter->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -624,6 +629,7 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	allybomber->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -749,6 +755,7 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	AllyCapital->addcomponent(health);
 
 	std::shared_ptr<teamcomponent> teamcomp = std::make_shared<teamcomponent>();
@@ -780,13 +787,13 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 	trackerboxent(AllyCapital, true);
 	healthbar(AllyCapital, glm::vec3(15, 0.5, 1), glm::vec3(0, 10, 0), false);
 
-    createCapTurret(AllyCapital, true, glm::vec3(7.217, 3.2, 4.978));
-	createCapTurret(AllyCapital, true, glm::vec3(8.031, 3.2, 10.738));
-	createCapTurret(AllyCapital, true, glm::vec3(9.151, 3.2, 17.051));
+    createCapTurret(AllyCapital, true, glm::vec3(7.217, 2.5, 4.978));
+	createCapTurret(AllyCapital, true, glm::vec3(8.031, 2.5, 10.738));
+	createCapTurret(AllyCapital, true, glm::vec3(9.151, 2.5, 17.051));
 
-	createCapTurret(AllyCapital, true, glm::vec3(-3.371, 3.2, 4.978));
-	createCapTurret(AllyCapital, true, glm::vec3(-3.948, 3.2, 11.390));
-	createCapTurret(AllyCapital, true, glm::vec3(-4.959, 3.2, 17.051));
+	createCapTurret(AllyCapital, true, glm::vec3(-3.371, 2.5, 4.978));
+	createCapTurret(AllyCapital, true, glm::vec3(-3.948, 2.5, 11.390));
+	createCapTurret(AllyCapital, true, glm::vec3(-4.959, 2.5, 17.051));
 		
 	return health;
 }
@@ -837,6 +844,7 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	health->hitdelete.second = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
+	health->explotionondeath = true;
 	turretEntity->addcomponent(health);
 
 	std::shared_ptr<physics> physicscomp = std::make_shared<physics>();
@@ -1399,11 +1407,10 @@ void entitymanager::createExplotionParticleEffect(particleExplotionData explotio
 
 	std::shared_ptr<particalemmiter> emitter = std::make_shared<particalemmiter>();
 	emitter->particleemitter = std::make_shared<ParticleSphereGen>();
-	emitter->particleemitter->getshader(Resourecmanager::instance().getfromshadholder("particleRender"), Resourecmanager::instance().getfromshadholder("particleUpdate"));
 	emitter->particleemitter->SetGeneratorProperties(explotiondata);
 	emitter->particleemitter->InitalizeParticleSystem(Resourecmanager::instance().getFromTextureHolder("Fire_Particle")->mytexture,explotiondata.generators);
-
 	explotion->addcomponent(emitter);
+
 	entities[explotion->returnID()] = explotion;
 	tooadd.push_back(explotion);
 }

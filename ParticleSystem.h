@@ -14,6 +14,8 @@ public:
 
 	ParticleSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys);
 
+	void newEmitterEvent();
+
 	void soiwant(std::vector<std::shared_ptr<ACC::entity>> ent);
 
 	void update(float &dt, bool &go);

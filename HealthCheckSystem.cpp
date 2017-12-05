@@ -34,10 +34,11 @@ void HealthCheckSystem::damageevents()
 				newsound->position = newhealthevent->position;
 				myworld->returnmanager()->createsound(newsound);
 			}
+
+			allevents.erase(allevents.begin() + i);
+			i--;
 		}
 
-		allevents.erase(allevents.begin() + i);
-		i--;
 	}
 
 	myEventsSystem->setevents(allevents);
@@ -82,14 +83,11 @@ void HealthCheckSystem::update(float & dt, bool & go)
 				myworld->returnmanager()->createsound(newsound);
 			}
 
-			std::shared_ptr<thingsiown> mythings = num->getcomponent<thingsiown>();
-			if (mythings != NULL)
+			if (healthobjects->explotionondeath)
 			{
-				for (int i = 0; i < mythings->stuffiown.size(); i++)
-				{
-					myworld->returnmanager()->addtodeletelist(mythings->stuffiown[i]);
-				}
+				createondeathevent(num->returnID());
 			}
+
 		}
 	}
 }
@@ -120,4 +118,20 @@ void HealthCheckSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 	}
 
 
+}
+
+void HealthCheckSystem::createondeathevent(int ID)
+{
+	std::shared_ptr<explostionEvent> newexplotion = std::make_shared<explostionEvent>();
+	std::shared_ptr<transposecomponent> deathtrans = myworld->returnmanager()->getentfromid(ID)->getcomponent<transposecomponent>();
+	newexplotion->explotionData.pos = deathtrans->position;
+	newexplotion->explotionData.generators = 200;
+	newexplotion->explotionData.maxCycles = 5;
+	newexplotion->explotionData.numberToGen = 35;
+	newexplotion->explotionData.particleSize = 0.1;
+	newexplotion->explotionData.radious = 2.0;
+	newexplotion->explotionData.minLife = 3.0f;
+	newexplotion->explotionData.maxAddedLife = 0.5;
+	newexplotion->explotionData.spawnEvery = 0.2;
+	myEventsSystem->setevent(newexplotion);
 }

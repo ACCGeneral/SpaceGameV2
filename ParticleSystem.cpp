@@ -8,6 +8,24 @@ ParticleSystem::ParticleSystem(std::shared_ptr<world> w, std::shared_ptr<EventSy
 
 }
 
+void ParticleSystem::newEmitterEvent()
+{
+
+	std::vector<std::shared_ptr<Event>> allevents = myEventsSystem->getmyevents();
+
+	for (int i = 0; i < allevents.size(); i++)
+	{
+		if (allevents[i]->mytype == explotion)
+		{
+			std::shared_ptr<explostionEvent> newEmitterEvent = std::static_pointer_cast<explostionEvent>(allevents[i]);
+			myworld->returnmanager()->createExplotionParticleEffect(newEmitterEvent->explotionData);
+			allevents.erase(allevents.begin() + i);
+			i--;
+		}
+	}
+	myEventsSystem->setevents(allevents);
+}
+
 void ParticleSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 {
 	for (int i = 0; i < ent.size(); i++)
@@ -23,6 +41,8 @@ void ParticleSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 void ParticleSystem::update(float & dt, bool & go)
 {
 
+	newEmitterEvent();
+
 	for (int i = 0; i < particlespawner.size(); i++)
 	{
 		std::shared_ptr<particalemmiter> particleEmit = particlespawner[i]->getcomponent<particalemmiter>();
@@ -34,8 +54,9 @@ void ParticleSystem::update(float & dt, bool & go)
 		else
 		{
 			glm::quat quadcamera = glm::toQuat(myworld->getmaincam()->getview());
-			glm::vec3 up = quadcamera * glm::vec3(0, 1, 0);
-			particleEmit->particleemitter->SetMatrices(myworld->getmaincam()->getproj(), myworld->getmaincam()->getpos(), myworld->getmaincam()->getdir(), up);
+			glm::vec3 up = glm::vec3(0, 1, 0) * quadcamera;
+			glm::vec3 lookat = myworld->getmaincam()->getpos() + myworld->getmaincam()->getdir();
+			particleEmit->particleemitter->SetMatrices(myworld->getmaincam()->getproj(), myworld->getmaincam()->getpos(), lookat, up); //bug here
 		}
 	}
 

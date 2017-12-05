@@ -121,10 +121,9 @@ public:
 		}
 	}
 
-	void getshader(std::shared_ptr<shader> ren, std::shared_ptr<shader> upD)
+	void getshader(std::shared_ptr<shader> ren)
 	{
 		rendershader = ren;
-		updateshader = upD;
 	}
 
 

@@ -27,6 +27,9 @@ public:
 
 	void doihave(std::vector<std::shared_ptr<ACC::entity>> ent);
 
+	void createondeathevent(int ID);
+
 	void cleanup() {}
+
 
 };

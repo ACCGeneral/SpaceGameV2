@@ -42,6 +42,7 @@ struct explostionEvent : public Event
 	}
 
 	particleExplotionData explotionData;
+	int ID;
 };
 
 struct soundEvent : public Event
