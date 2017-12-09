@@ -17,7 +17,6 @@ void lifetimesystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 		}
 	}
 
-
 }
 
 void lifetimesystem::update(float & dt, bool & go)

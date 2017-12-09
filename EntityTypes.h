@@ -18,6 +18,7 @@ namespace enttypes
 		Bullet,
 		Crosshair,
 		Dirlight,
+		pointLight,
 		Skybox,
 		Spotlight,
 		AllyCapIcon,

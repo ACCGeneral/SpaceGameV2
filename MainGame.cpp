@@ -20,6 +20,9 @@
 #include "TargetingSystem.h"
 #include "CollisionResolveSystem.h"
 #include "ParticleSystem.h"
+#include "dirlight.h"
+#include "spotlight.h"
+#include "PointLight.h"
 
 MainGame::MainGame(std::shared_ptr<SceneManager> Sman, std::shared_ptr<entitymanager> myman, std::shared_ptr<EventSystem> ES) : scene(Sman,ES)
 {

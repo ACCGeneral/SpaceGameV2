@@ -1,6 +1,8 @@
 #include "entitymanager.h"
 #include "particleSphereGen.h"
-
+#include "dirlight.h"
+#include "PointLight.h"
+#include "spotlight.h"
 //we assign components to our needed entities 
 
 entitymanager::entitymanager()
@@ -52,6 +54,25 @@ void entitymanager::create_directionlight(std::shared_ptr<dirlight> mydirinfo) /
 	entities[dirlight->returnID()] = dirlight;
 	tooadd.push_back(dirlight);
 
+}
+
+void entitymanager::createpointLight(std::shared_ptr<pointlight> mypointinfo, float life)
+{
+	std::shared_ptr<ACC::entity> pointlight = std::make_shared<ACC::entity>(IDs.getID(), enttypes::pointLight);
+
+	std::shared_ptr<lightcomp> entlight = std::make_shared<lightcomp>();
+	entlight->mylight = mypointinfo;
+	pointlight->addcomponent(entlight);
+
+	if (life != 0)
+	{
+		std::shared_ptr<lifespan> lifetime = std::make_shared<lifespan>();
+		lifetime->lifetime = life;
+		pointlight->addcomponent(lifetime);
+	}
+
+	entities[pointlight->returnID()] = pointlight;
+	tooadd.push_back(pointlight);
 }
 
 void entitymanager::createflashlight(std::shared_ptr<ACC::entity> parent) //create a flashlight
@@ -1401,7 +1422,7 @@ void entitymanager::createsound(std::shared_ptr<soundComponet> soundcomp)
 	tooadd.push_back(sound);
 }
 
-void entitymanager::createExplotionParticleEffect(particleExplotionData explotiondata)
+void entitymanager::createExplotionParticleEffect(particleExplotionData explotiondata, std::shared_ptr<pointlight> newPointInfo)
 {
 	std::shared_ptr<ACC::entity> explotion = std::make_shared<ACC::entity>(IDs.getID(), enttypes::ExplotionEffect);
 
@@ -1413,6 +1434,8 @@ void entitymanager::createExplotionParticleEffect(particleExplotionData explotio
 
 	entities[explotion->returnID()] = explotion;
 	tooadd.push_back(explotion);
+
+	createpointLight(newPointInfo, explotiondata.minLife - 1.0);
 }
 
 

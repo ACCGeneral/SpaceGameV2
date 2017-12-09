@@ -1,4 +1,7 @@
 #include "AnimationSystem.h"
+#include "spotlight.h"
+#include "PointLight.h"
+#include "dirlight.h"
 
 AnimationSystem::AnimationSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {

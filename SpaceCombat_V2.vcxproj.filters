@@ -351,6 +351,9 @@
     <ClInclude Include="TextureHolder.h">
       <Filter>Header Files\Models and sounds</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common.cpp">
@@ -562,6 +565,9 @@
     </ClCompile>
     <ClCompile Include="TextureHolder.cpp">
       <Filter>Source Files\Models and sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files\Lights</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

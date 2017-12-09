@@ -1,11 +1,13 @@
 #include "RenderSystem.h"
 #include "maincamera.h"
 #include "particleSphereGen.h"
+#include "dirlight.h"
+#include "spotlight.h"
+#include "PointLight.h"
 
 RenderSystem::RenderSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "RenderSystem";
-
 }
 
 void RenderSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
@@ -46,9 +48,7 @@ void RenderSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 
 void RenderSystem::update(float & dt, bool & go) //render all of our entities 
 {
-
 	int spotlightnum = 0;
-	int dirlightnum = 0;
 	int pointlightnum = 0;
 
 	std::vector<std::shared_ptr<ACC::entity>> entstorender;
@@ -61,7 +61,6 @@ void RenderSystem::update(float & dt, bool & go) //render all of our entities
 	for (auto models : entstorender)
 	{
 		spotlightnum = 0;
-		dirlightnum = 0;
 		pointlightnum = 0;
 		std::shared_ptr<transposecomponent> entitytrans = models->getcomponent<transposecomponent>();
 		std::shared_ptr<modelcomponent> entitymodel = models->getcomponent<modelcomponent>(); 
@@ -76,15 +75,14 @@ void RenderSystem::update(float & dt, bool & go) //render all of our entities
 					std::shared_ptr<lightcomp> light = L->getcomponent<lightcomp>();
 					if (light->mylight->returnlighttype() == DLight)
 					{
-						light->mylight->shaderlinks(entitymodel->myshader->returnprogram(), std::to_string(dirlightnum));
-						dirlightnum++;
+						light->mylight->shaderlinks(entitymodel->myshader->returnprogram(), std::to_string(0));
 					}
-					else if (light->mylight->returnlighttype() == PLight)
+					else if (light->mylight->returnlighttype() == PLight && pointlightnum < 10)
 					{
 						light->mylight->shaderlinks(entitymodel->myshader->returnprogram(), std::to_string(pointlightnum));
 						pointlightnum++;
 					}
-					else
+					else if(light->mylight->returnlighttype() == Slight && spotlightnum < 10)
 					{
 						light->mylight->shaderlinks(entitymodel->myshader->returnprogram(), std::to_string(spotlightnum));
 						spotlightnum++;
@@ -96,6 +94,8 @@ void RenderSystem::update(float & dt, bool & go) //render all of our entities
 				glUniform3f(glGetUniformLocation(entitymodel->myshader->returnprogram(), "camerapos"), campos.x, campos.y, campos.z);
 				glUniform1f(glGetUniformLocation(entitymodel->myshader->returnprogram(), "strength"), entitymodel->mystrenght);
 				glUniform1f(glGetUniformLocation(entitymodel->myshader->returnprogram(), "shine"), entitymodel->myshine);
+				glUniform1i(glGetUniformLocation(entitymodel->myshader->returnprogram(), "numOfPointLights"), pointlightnum);
+				glUniform1i(glGetUniformLocation(entitymodel->myshader->returnprogram(), "numOfSpotLights"), spotlightnum);
 			}
 
 			glUniformMatrix4fv(glGetUniformLocation(entitymodel->myshader->returnprogram(), "view"), 1, GL_FALSE, glm::value_ptr(myworld->getmaincam()->getview())); //link model view projection matrix
@@ -139,10 +139,17 @@ void RenderSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 		{
 			if (lights[i] == ents[j])
 			{
-				modelents.erase(lights.begin() + i);
+				ents.erase(ents.begin() + j);
+				lights.erase(lights.begin() + i);
 				i--;
+				j--;
 				break;
 			}
+		}
+
+		if (ents.size() == 0)
+		{
+			return;
 		}
 	}
 

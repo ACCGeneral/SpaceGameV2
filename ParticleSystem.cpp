@@ -1,6 +1,7 @@
 #include "ParticleSystem.h"
 #include "maincamera.h"
 #include "particleSphereGen.h"
+#include "PointLight.h"
 
 ParticleSystem::ParticleSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
@@ -18,7 +19,14 @@ void ParticleSystem::newEmitterEvent()
 		if (allevents[i]->mytype == explotion)
 		{
 			std::shared_ptr<explostionEvent> newEmitterEvent = std::static_pointer_cast<explostionEvent>(allevents[i]);
-			myworld->returnmanager()->createExplotionParticleEffect(newEmitterEvent->explotionData);
+			std::shared_ptr<pointlight> newPointInfo = std::make_shared<pointlight>();
+			newPointInfo->setpos(newEmitterEvent->explotionData.pos);
+			newPointInfo->setamb(glm::vec3(1.0, 0.8, 0.8));
+			newPointInfo->setlightcolour(glm::vec3(1.0, 0.8, 0.8));
+			newPointInfo->setconstant(1.0f);
+			newPointInfo->setlinear(0.045);
+			newPointInfo->setquadratic(0.0075);
+			myworld->returnmanager()->createExplotionParticleEffect(newEmitterEvent->explotionData, newPointInfo);
 			allevents.erase(allevents.begin() + i);
 			i--;
 		}

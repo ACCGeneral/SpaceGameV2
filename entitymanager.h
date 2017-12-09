@@ -2,8 +2,6 @@
 
 #include "entity.h"
 #include "ID_manager.h"
-#include "dirlight.h"
-#include "spotlight.h"
 #include <gtc/matrix_transform.hpp> 
 #include <memory>
 #include "Resourcemanager.h"
@@ -14,6 +12,9 @@
 #include "uisettings.h"
 #include "particleExplotionData.h"
 
+class dirlight;
+class pointlight;
+class spotlight;
 
 // the entity manager for creating and holding entities
 class entitymanager
@@ -29,6 +30,7 @@ public:
 
 	void create_skybox();
 	void create_directionlight(std::shared_ptr<dirlight> mydirinfo);
+	void createpointLight(std::shared_ptr<pointlight> mypointinfo, float life);
 	void createflashlight(std::shared_ptr<ACC::entity> parent);
 	void createplayer(glm::vec3 pos);
 
@@ -57,7 +59,7 @@ public:
 
 	void createsound(std::shared_ptr<soundComponet> soundcomp);
 
-	void createExplotionParticleEffect(particleExplotionData explotiondata);
+	void createExplotionParticleEffect(particleExplotionData explotiondata, std::shared_ptr<pointlight> newPointInfo);
 
 	entitymanager();
 
