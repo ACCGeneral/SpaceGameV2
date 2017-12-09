@@ -296,7 +296,7 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(enemyfighter);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 2.0);
 	enemyfighter->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -400,7 +400,7 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(enemeybomber);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 2.0);
 	enemeybomber->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -487,7 +487,7 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.3);
 	AI->MovCon.setme(EnemyCapital);
 	EnemyCapital->addcomponent(AI);
 
@@ -603,7 +603,7 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(AllyFighter);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 2.0);
 	AllyFighter->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -707,7 +707,7 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(allybomber);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 2.0);
 	allybomber->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -795,7 +795,7 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(AllyCapital);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.5);
 	AllyCapital->addcomponent(AI);
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
@@ -928,7 +928,7 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	std::shared_ptr<AIcomp> AI = std::make_shared<AIcomp>();
 	AI->free = true;
 	AI->MovCon.setme(turretEntity);
-	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.2);
+	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.5);
 	turretEntity->addcomponent(AI);
 
 	entities[turretEntity->returnID()] = turretEntity;

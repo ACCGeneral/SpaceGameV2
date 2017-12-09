@@ -43,7 +43,7 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	glm::vec3 seekforce;
 
-	glm::vec3 seperationforce = myai->MovCon.seperation(myteam) * 0.4f;
+	glm::vec3 seperationforce = myai->MovCon.seperation(myteam) * 0.5f;
 
 	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxspeed) * 100, mycol->mysphere->rad);
 
