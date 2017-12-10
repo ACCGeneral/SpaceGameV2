@@ -109,8 +109,17 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 		attackvec.x += 1;
 	}
 
+	glm::mat4 lookatmatrix;
 
-	glm::mat4 lookatmatrix = glm::transpose(glm::lookAt(attackvec, mytrans->position, glm::vec3(0.0f, 1.0f, 0.0f)));
+	if (shotdegrees <= 8)
+	{
+		lookatmatrix = glm::transpose(glm::lookAt(attacktrans->position, mytrans->position, glm::vec3(0.0f, 1.0f, 0.0f)));
+	}
+	else
+	{
+		lookatmatrix = glm::transpose(glm::lookAt(attackvec, mytrans->position, glm::vec3(0.0f, 1.0f, 0.0f)));
+	}
+
 	glm::quat newrotation = glm::toQuat(lookatmatrix);
 	float angleofRot = glm::clamp(2.0f * dt, 0.0f, 1.0f);
 	mytrans->myquat = glm::slerp(mytrans->myquat, newrotation, angleofRot);

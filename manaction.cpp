@@ -57,9 +57,9 @@ void manaction::run(float dt, std::shared_ptr<world> myworld)
 	raycollinfo raycol = myworld->returnoct()->returnraycol();
 	if (raycol.hit == true)
 	{
-		avoidforce = myai->MovCon.avoidobject(raycol.hitpoint, raycol.center) * 0.9f;
+		avoidforce = myai->MovCon.avoidobject(raycol.hitpoint, raycol.center);
 	}
-	glm::vec3 seekforce = myai->MovCon.seekobject(mytrans->position + myman.manpos[mannum]);
+	glm::vec3 seekforce = myai->MovCon.seekobject(mytrans->position + myman.manpos[mannum]) * 0.7f;
 
 	if (roll < myman.roll[mannum])
 	{
