@@ -21,8 +21,15 @@ void attackrunaction::gettarget(std::shared_ptr<ACC::entity> tar)
 
 void attackrunaction::start()
 {
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<transposecomponent> enemycapsing = mytarget->getcomponent<transposecomponent>();
+	mytrans = me->getcomponent<transposecomponent>();
+	enemycapsing = mytarget->getcomponent<transposecomponent>();
+	myai = me->getcomponent<AIcomp>();
+	myphys = me->getcomponent<physics>();
+	mydir = me->getcomponent<directioncomponent>();
+	mycol = me->getcomponent<collisioncomp>();
+	enemycol = mytarget->getcomponent<collisioncomp>();
+	myguns = me->getcomponent<fighterguns>();
+
 	glm::quat tocap = glm::toQuat(glm::lookAt(mytrans->position, enemycapsing->position,glm::vec3(0,1,0)));
 
 	for (int i = 0; i < attackman.manpos.size(); i++)
@@ -38,19 +45,11 @@ void attackrunaction::start()
 
 void attackrunaction::run(float dt, std::shared_ptr<world> myworld)
 {
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<physics> myphys = me->getcomponent<physics>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
-
-	std::shared_ptr<transposecomponent> enemytrans = mytarget->getcomponent<transposecomponent>();
-	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
-
+	
 	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 100, mycol->mysphere->rad);
 
 	glm::vec3 seekforce;
-	float targetdistance = glm::length(mytrans->position - enemytrans->position);
+	float targetdistance = glm::length(mytrans->position - enemycapsing->position);
 
 	if (targetdistance < (mycol->mysphere->rad + enemycol->mysphere->rad + 2.0f))
 	{
@@ -120,7 +119,6 @@ void attackrunaction::run(float dt, std::shared_ptr<world> myworld)
 
 	if (enemycol->myAABB->raycollision(newray,t) && targetdistance < 500)
 	{
-		std::shared_ptr<fighterguns> myguns = me->getcomponent<fighterguns>();
 		if (myguns->currettime >= myguns->firetime)
 		{
 			myguns->fire = true;

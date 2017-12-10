@@ -21,19 +21,19 @@ void bombingrunaction::start()
 	roll = 0;
 	mannum = 0;
 
+	myguns = me->getcomponent<fighterguns>();
+	myai = me->getcomponent<AIcomp>();
+	mytrans = me->getcomponent<transposecomponent>();
+	myphys = me->getcomponent<physics>();
+	mydir = me->getcomponent<directioncomponent>();
+	mycol = me->getcomponent<collisioncomp>();
+
+	enemytrans = mytarget->getcomponent<transposecomponent>();
+	enemycol = mytarget->getcomponent<collisioncomp>();
 }
 
 void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 {
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<physics> myphys = me->getcomponent<physics>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
-
-	std::shared_ptr<transposecomponent> enemytrans = mytarget->getcomponent<transposecomponent>();
-	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
-
 
 	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 100, mycol->mysphere->rad);
 
@@ -111,7 +111,6 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 
 	if (enemycol->mysphere->raycollision(newray, t) && targetdistance < 600)
 	{
-		std::shared_ptr<fighterguns> myguns = me->getcomponent<fighterguns>();
 		if (myguns->currettime >= myguns->firetime)
 		{
 			myguns->fire = true;

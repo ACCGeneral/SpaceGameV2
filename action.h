@@ -3,6 +3,15 @@
 #include <string>
 
 class world;
+class teamunits;
+class transposecomponent;
+class directioncomponent;
+class collisioncomp;
+class physics;
+class collisioncomp;
+class fighterguns;
+class AIcomp;
+class fighterguns;
 
 namespace ACC
 {

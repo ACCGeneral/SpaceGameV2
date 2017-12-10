@@ -18,7 +18,11 @@ void manaction::start()
 	roll = 0;
 	mannum = 0;
 
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
+	mytrans = me->getcomponent<transposecomponent>();
+	myphys = me->getcomponent<physics>();
+	mydir = me->getcomponent<directioncomponent>();
+	myai = me->getcomponent<AIcomp>();
+	mycol = me->getcomponent<collisioncomp>();
 
 	for (int i = 0; i < myman.manpos.size(); i++)
 	{
@@ -38,12 +42,6 @@ void manaction::run(float dt, std::shared_ptr<world> myworld)
 		time = 0;
 		return;
 	}
-
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<physics> myphys = me->getcomponent<physics>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
 
 	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 80, mycol->mysphere->rad);
 

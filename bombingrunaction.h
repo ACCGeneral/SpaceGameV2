@@ -16,6 +16,17 @@ private:
 	int mannum;
 	int roll;
 
+
+	std::shared_ptr<AIcomp> myai;
+	std::shared_ptr<transposecomponent> mytrans;
+	std::shared_ptr<physics> myphys;
+	std::shared_ptr<directioncomponent> mydir;
+	std::shared_ptr<collisioncomp> mycol;
+	std::shared_ptr<fighterguns> myguns;
+
+	std::shared_ptr<transposecomponent> enemytrans;
+	std::shared_ptr<collisioncomp> enemycol;
+
 public:
 
 	bombingrunaction()

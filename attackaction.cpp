@@ -17,29 +17,27 @@ void attackaction::gettarget(std::shared_ptr<ACC::entity> tar)
 
 void attackaction::start()
 {
-	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
-
+	myphyscomp = me->getcomponent<physics>();
+	mytrans = me->getcomponent<transposecomponent>();
+	mydir = me->getcomponent<directioncomponent>();
+	mycol = me->getcomponent<collisioncomp>();
 	orgmaxvel = myphyscomp->maxspeed;
+	myai = me->getcomponent<AIcomp>();
+	myguns = me->getcomponent<fighterguns>();
+
+	enemycol = mytarget->getcomponent<collisioncomp>();
+	enemyphys = mytarget->getcomponent<physics>();
+	attacktrans = mytarget->getcomponent<transposecomponent>();
 }
 
 void attackaction::run(float dt, std::shared_ptr<world> myworld)
 {
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-
 	if (mytarget->returndeleteme())
 	{
 		mytarget = NULL;
 		time = 0;
 		return;
 	}
-
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<transposecomponent> attacktrans = mytarget->getcomponent<transposecomponent>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
-	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
-
-	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
 
 	glm::vec3 seekforce;
 
@@ -51,7 +49,6 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	if (targetdistance <= 100)
 	{
-		std::shared_ptr<physics> enemyphys = mytarget->getcomponent<physics>();
 		myphyscomp->maxspeed = glm::length(enemyphys->velocity);
 	}
 	else
@@ -85,7 +82,6 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	if (glm::degrees(shotdegrees) < enemycol->mysphere->rad && targetdistance < 500)
 	{
-		std::shared_ptr<fighterguns> myguns = me->getcomponent<fighterguns>();
 		if (myguns->currettime >= myguns->firetime)
 		{
 			myguns->fire = true;
@@ -130,6 +126,6 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 void attackaction::end()
 {
-	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
+	myphyscomp = me->getcomponent<physics>();
 	myphyscomp->maxspeed = orgmaxvel;
 }

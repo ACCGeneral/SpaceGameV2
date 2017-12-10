@@ -12,7 +12,12 @@ void fleeaction::setflee(std::shared_ptr<ACC::entity> flee)
 void fleeaction::start()
 {
 
-
+	myai = me->getcomponent<AIcomp>();
+	mytrans = me->getcomponent<transposecomponent>();
+	fleetrans = fleefrom->getcomponent<transposecomponent>();
+	mydir = me->getcomponent<directioncomponent>();
+	myphyscomp = me->getcomponent<physics>();
+	mycol = me->getcomponent<collisioncomp>();
 
 }
 
@@ -25,12 +30,7 @@ void fleeaction::run(float dt, std::shared_ptr<world> myworld)
 		return;
 	}
 
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<transposecomponent> fleetrans = fleefrom->getcomponent<transposecomponent>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<physics> myphyscomp = me->getcomponent<physics>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
+	
 
 	float lookahead = glm::max((glm::length(myphyscomp->velocity) / myphyscomp->maxspeed) * 80, mycol->mysphere->rad);
 

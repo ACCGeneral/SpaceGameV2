@@ -13,6 +13,15 @@ private:
 	maneuver attackman;
 	maneuver activeman;
 
+	std::shared_ptr<transposecomponent> mytrans;
+	std::shared_ptr<transposecomponent> enemycapsing;
+	std::shared_ptr<AIcomp> myai;
+	std::shared_ptr<physics> myphys;
+	std::shared_ptr<directioncomponent> mydir;
+	std::shared_ptr<collisioncomp> mycol;
+	std::shared_ptr<collisioncomp> enemycol;
+	std::shared_ptr<fighterguns> myguns;
+
 	int mannum;
 	int roll;
 

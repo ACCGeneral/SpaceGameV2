@@ -10,6 +10,13 @@ private:
 
 	std::shared_ptr<ACC::entity> fleefrom;
 
+	std::shared_ptr<AIcomp> myai;
+	std::shared_ptr<transposecomponent> mytrans;
+	std::shared_ptr<transposecomponent> fleetrans;
+	std::shared_ptr<directioncomponent> mydir;
+	std::shared_ptr<physics> myphyscomp;
+	std::shared_ptr<collisioncomp> mycol;
+
 public:
 
 	fleeaction()

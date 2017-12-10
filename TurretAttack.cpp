@@ -8,6 +8,15 @@ void TurretAttack::setmyman(maneuver mym)
 {
 	myman = mym;
 
+	myai = me->getcomponent<AIcomp>();
+	mytrans = me->getcomponent<transposecomponent>();
+	myphys = me->getcomponent<physics>();
+	mydir = me->getcomponent<directioncomponent>();
+	mycol = me->getcomponent<collisioncomp>();
+	enemytrans = mytarget->getcomponent<transposecomponent>();
+	enemycol = mytarget->getcomponent<collisioncomp>();
+	myanimation = mytarget->getcomponent<animationholdercomp>();
+	capitalcol = myanimation->myowner->getcomponent<collisioncomp>();
 }
 
 void TurretAttack::setcaptarget(std::shared_ptr<ACC::entity> captar)
@@ -22,77 +31,16 @@ void TurretAttack::start()
 	roll = 0;
 	mannum = 0;
 
-
 }
 
 void TurretAttack::run(float dt, std::shared_ptr<world> myworld)
 {
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<physics> myphys = me->getcomponent<physics>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
-
-	std::shared_ptr<transposecomponent> enemytrans = mytarget->getcomponent<transposecomponent>();
-	std::shared_ptr<collisioncomp> enemycol = mytarget->getcomponent<collisioncomp>();
-	std::shared_ptr<animationholdercomp> myanimation = mytarget->getcomponent<animationholdercomp>();
-
-	std::shared_ptr<collisioncomp> capitalcol = myanimation->myowner->getcomponent<collisioncomp>();
 
 	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 100, mycol->mysphere->rad);
 
-	glm::vec3 seekforce;
+	glm::vec3 seekforce = seekforcecal(dt);
 
 	float targetdistance = glm::length(mytrans->position - enemytrans->position);
-
-	if (man == false)
-	{
-
-		if (targetdistance < (mycol->mysphere->rad + enemycol->mysphere->rad + 2.0f) || targetdistance < (mycol->mysphere->rad + capitalcol->mysphere->rad + 2.0f))
-		{
-			man = true;
-			for (int i = 0; i < myman.manpos.size(); i++)
-			{
-				float lenght = glm::length(myman.manpos[i]);
-				myman.manpos[i] = mytrans->myquat * glm::normalize(myman.manpos[i]);
-				myman.manpos[i] *= lenght;
-			}
-		}
-		else
-		{
-			seekforce = myai->MovCon.seekobject(enemytrans->position) * 0.7f;
-		}
-	}
-	else
-	{
-		seekforce = myai->MovCon.seekobject(myman.manpos[mannum] + mytrans->position) * 0.7f;
-
-		if (roll < myman.roll[mannum])
-		{
-			roll++;
-		}
-		else if (roll > myman.roll[mannum])
-		{
-			roll--;
-		}
-
-		if (roll > 360)
-		{
-			roll = 0;
-		}
-
-		myman.time[mannum] -= dt;
-
-		if (myman.time[mannum] <= 0)
-		{
-			mannum++;
-		}
-		if (mannum == myman.manpos.size())
-		{
-			time = 0;
-		}
-	}
-
 
 	Ray newray;
 	newray.pos = mytrans->position;
@@ -148,4 +96,60 @@ void TurretAttack::end()
 {
 
 
+}
+
+glm::vec3 TurretAttack::seekforcecal(float dt)
+{
+	glm::vec3 seekforce;
+
+	float targetdistance = glm::length(mytrans->position - enemytrans->position);
+
+	if (man == false)
+	{
+		if (targetdistance < (mycol->mysphere->rad + enemycol->mysphere->rad + 2.0f) || targetdistance < (mycol->mysphere->rad + capitalcol->mysphere->rad + 2.0f))
+		{
+			man = true;
+			for (int i = 0; i < myman.manpos.size(); i++)
+			{
+				float lenght = glm::length(myman.manpos[i]);
+				myman.manpos[i] = mytrans->myquat * glm::normalize(myman.manpos[i]);
+				myman.manpos[i] *= lenght;
+			}
+		}
+		else
+		{
+			seekforce = myai->MovCon.seekobject(enemytrans->position) * 0.7f;
+		}
+	}
+	else
+	{
+		seekforce = myai->MovCon.seekobject(myman.manpos[mannum] + mytrans->position) * 0.7f;
+
+		if (roll < myman.roll[mannum])
+		{
+			roll++;
+		}
+		else if (roll > myman.roll[mannum])
+		{
+			roll--;
+		}
+
+		if (roll > 360)
+		{
+			roll = 0;
+		}
+
+		myman.time[mannum] -= dt;
+
+		if (myman.time[mannum] <= 0)
+		{
+			mannum++;
+		}
+		if (mannum == myman.manpos.size())
+		{
+			time = 0;
+		}
+	}
+
+	return seekforce;
 }

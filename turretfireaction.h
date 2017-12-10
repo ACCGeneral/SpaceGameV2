@@ -13,6 +13,21 @@ private:
 
 	void firegunstest(float dt);
 
+	std::shared_ptr<directioncomponent> mydir;
+	std::shared_ptr<turretcomp> myturretcomp;
+	std::shared_ptr<transposecomponent> mytrans;
+	std::shared_ptr<animationholdercomp> myanim;
+	std::shared_ptr<directioncomponent> baseturretdir;
+
+	std::shared_ptr<transposecomponent> mygunstrans;
+	std::shared_ptr<directioncomponent> gundir;
+	std::shared_ptr<animationholdercomp> gunsanim;
+	std::shared_ptr<fighterguns> myguns;
+	
+
+	std::shared_ptr<collisioncomp> enemycol;
+	std::shared_ptr<transposecomponent> targettrans;
+	
 public:
 
 	turretfireaction()

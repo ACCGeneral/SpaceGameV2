@@ -11,19 +11,17 @@ void toenemycapship::setcaptarget(std::shared_ptr<ACC::entity> captar)
 void toenemycapship::start()
 {
 
+	mytrans = me->getcomponent<transposecomponent>();
+	myphys = me->getcomponent<physics>();
+	mydir = me->getcomponent<directioncomponent>();
+	myai = me->getcomponent<AIcomp>();
+	mycol = me->getcomponent<collisioncomp>();
 
+	captrans = capattack->getcomponent<transposecomponent>();
 }
 
 void toenemycapship::run(float dt, std::shared_ptr<world> myworld)
 {
-	std::shared_ptr<transposecomponent> mytrans = me->getcomponent<transposecomponent>();
-	std::shared_ptr<physics> myphys = me->getcomponent<physics>();
-	std::shared_ptr<directioncomponent> mydir = me->getcomponent<directioncomponent>();
-	std::shared_ptr<AIcomp> myai = me->getcomponent<AIcomp>();
-	std::shared_ptr<collisioncomp> mycol = me->getcomponent<collisioncomp>();
-
-	std::shared_ptr<transposecomponent> captrans = capattack->getcomponent<transposecomponent>();
-
 	float lookahead = glm::max((glm::length(myphys->velocity) / myphys->maxspeed) * 80, mycol->mysphere->rad);
 
 	if (glm::length(mytrans->position - captrans->position) < 50)
