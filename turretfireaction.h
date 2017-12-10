@@ -27,12 +27,15 @@ private:
 
 	std::shared_ptr<collisioncomp> enemycol;
 	std::shared_ptr<transposecomponent> targettrans;
+
+	float timenotshot;
 	
 public:
 
 	turretfireaction()
 	{
 		mytype = "turretfireaction";
+		timenotshot = 0;
 	}
 
 	void settarget(std::shared_ptr<ACC::entity> tar);

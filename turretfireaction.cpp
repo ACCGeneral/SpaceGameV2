@@ -18,6 +18,7 @@ void turretfireaction::firegunstest(float dt)
 			if (myguns->currettime >= myguns->firetime)
 			{
 				myguns->fire = true;
+				timenotshot = 0;
 			}
 		}
 
@@ -80,8 +81,9 @@ void turretfireaction::start()
 
 void turretfireaction::run(float dt, std::shared_ptr<world> myworld)
 {
+	timenotshot += dt;
 
-	if (target->returndeleteme())
+	if (target->returndeleteme() || timenotshot >= 3.0)
 	{
 		target = NULL;
 		time = 0;
