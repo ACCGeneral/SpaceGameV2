@@ -11,7 +11,6 @@ void idelaction::start()
 
 void idelaction::run(float dt, std::shared_ptr<world> myworld)
 {
-
 	time -= dt;
 }
 
