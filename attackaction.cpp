@@ -107,7 +107,7 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 
 	glm::mat4 lookatmatrix;
 
-	if (shotdegrees <= 8)
+	if (glm::degrees(shotdegrees) <= 10)
 	{
 		lookatmatrix = glm::transpose(glm::lookAt(attacktrans->position, mytrans->position, glm::vec3(0.0f, 1.0f, 0.0f)));
 	}

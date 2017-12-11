@@ -37,7 +37,7 @@ namespace ACC
 		template <typename Type>  //a template so we dont need a function for every component
 		std::shared_ptr<Type> getcomponent()
 		{
-			for (auto num : mycomponents)
+			for (auto num : mycomponents)	
 			{
 				if (num->GetType() == Type::TypeID)
 				{

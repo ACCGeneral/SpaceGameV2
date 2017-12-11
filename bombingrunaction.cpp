@@ -44,7 +44,7 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 	if (man == false)
 	{
 
-		if (targetdistance < (mycol->mysphere->rad + enemycol->mysphere->rad + 2.0f))
+		if (targetdistance < (mycol->mysphere->rad * 2.5))
 		{
 			man = true;
 			for (int i = 0; i < myman.manpos.size(); i++)
