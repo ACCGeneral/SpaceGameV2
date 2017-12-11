@@ -29,6 +29,7 @@ void CollisionSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 			newinfo.cantmove = entcoldata->imstatic;
 			newinfo.physicsobj = entcoldata->physicseffected;
 			newinfo.cantcollide = entcoldata->dontcolwith;
+			newinfo.bullettype = entcoldata->bullet;
 			root->addobject(newinfo);
 		}
 	}

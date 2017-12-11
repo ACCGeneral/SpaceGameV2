@@ -1116,6 +1116,7 @@ void entitymanager::createbullet(projectileinfo info)
 	std::shared_ptr<collisioncomp> col = std::make_shared<collisioncomp>();
 	col->physicseffected = false;
 	col->imstatic = false;
+	col->bullet = true;
 	col->myAABB = std::make_shared<AABB>(Resourecmanager::instance().getAABB("AllyBullet"));
 	col->mysphere = std::make_shared<sphere>(Resourecmanager::instance().getsphere("AllyBullet"));
 	std::vector<OBB> myobbs = Resourecmanager::instance().getOBB("bulletobb");
@@ -1195,6 +1196,7 @@ void entitymanager::createbomb(projectileinfo info)
 	std::shared_ptr<collisioncomp> col = std::make_shared<collisioncomp>();
 	col->physicseffected = false;
 	col->imstatic = false;
+	col->bullet = true;
 	col->myAABB = std::make_shared<AABB>(Resourecmanager::instance().getAABB("AllyBomb"));
 	col->mysphere = std::make_shared<sphere>(Resourecmanager::instance().getsphere("AllyBomb"));
 	std::vector<OBB> myobbs = Resourecmanager::instance().getOBB("bombobb");

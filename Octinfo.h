@@ -13,6 +13,7 @@ struct Octinfo
 	std::shared_ptr<sphere> objectsphere;
 	bool cantmove;
 	bool physicsobj;
+	bool bullettype;
 	int unitID;
 	std::vector<unsigned long int> cantcollide;
 };

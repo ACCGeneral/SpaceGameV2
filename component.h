@@ -235,9 +235,16 @@ public:
 	std::shared_ptr<sphere> mysphere;
 	bool imstatic;
 	bool physicseffected;
+	bool bullet;
+
 	std::vector<unsigned long int> dontcolwith;
 
 	int GetType() const { return TypeID; };
+
+	collisioncomp()
+	{
+		bullet = false;
+	}
 };
 
 class damagedelt : public ACC::component

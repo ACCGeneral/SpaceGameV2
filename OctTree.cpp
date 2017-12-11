@@ -137,7 +137,7 @@ void OctTree::collisiondetection() //now check for all collisions on this curren
 				int id1 = objects[i].unitID;
 				int id2 = entstocheck[j].unitID;
 
-				if (IDcheck(objects[i], entstocheck[j]) && !(objects[i].cantmove == true && entstocheck[j].cantmove == true))
+				if (IDcheck(objects[i], entstocheck[j]) && !(objects[i].cantmove == true && entstocheck[j].cantmove == true) && !(objects[i].bullettype == true && entstocheck[j].bullettype == true))
 				{
 					std::shared_ptr<AABB> otheraabb = entstocheck[j].objectaabb;
 		
