@@ -33,7 +33,6 @@ maneuvers::maneuvers()
 	newpair.first = loop;
 	newpair.second = "loop";
 	mymaneuver.push_back(newpair);
-	bombermaneuvers.push_back(newpair);
 
 	maneuver smalllefttoright;
 	smalllefttoright.manpos = std::vector<glm::vec3>{glm::vec3(1.0,0.2,1.0),glm::vec3(-1.0,-0.2,1.0) };
@@ -51,6 +50,26 @@ maneuvers::maneuvers()
 	attackrun.fulltime = 4.0f + 4.0f + 4.0f, + 4.0f;
 	newpair.first = attackrun;
 	newpair.second = "attackrun";
+	mymaneuver.push_back(newpair);
+	bombermaneuvers.push_back(newpair);
+
+	maneuver swingUpDownOnce;
+	swingUpDownOnce.manpos = std::vector<glm::vec3>{ glm::vec3(0.0,0.5,1.0), glm::vec3(0.0,-0.5,1.0)};
+	swingUpDownOnce.roll = std::vector<float>{ 180.0, 360.0f};
+	swingUpDownOnce.time = std::vector<float>{ 8.0f, 8.0f};
+	swingUpDownOnce.fulltime = 8.0f + 8.0f;
+	newpair.first = swingUpDownOnce;
+	newpair.second = "swingUpDownOnce";
+	mymaneuver.push_back(newpair);
+	bombermaneuvers.push_back(newpair);
+
+	maneuver swingUpDown;
+	swingUpDownOnce.manpos = std::vector<glm::vec3>{ glm::vec3(0.0,0.5,1.0), glm::vec3(0.0,-0.5,1.0), glm::vec3(0.0,0.5,1.0), glm::vec3(0.0,-0.5,1.0) };
+	swingUpDownOnce.roll = std::vector<float>{ 90.0, 180.0f, 270.0, 360.0f };
+	swingUpDownOnce.time = std::vector<float>{ 4.0f, 4.0f , 4.0f, 4.0f};
+	swingUpDownOnce.fulltime = 4.0f + 4.0f + 4.0f + 4.0f;
+	newpair.first = swingUpDownOnce;
+	newpair.second = "swingUpDownOnce";
 	mymaneuver.push_back(newpair);
 	bombermaneuvers.push_back(newpair);
 }
