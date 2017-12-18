@@ -175,136 +175,79 @@ void attackflyer(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits> ene
 	float healthscore;
 	float distancescore;
 	float anglescore;
-	float capshipmulti = 1.0f;
 
-
-
-	for (int i = 0; i < enemyunits->bomber.size(); i++)
+	for (int i = 0; i < enemyunits->allunits.size(); i++)
 	{
-		std::shared_ptr<transposecomponent> enemytrans = enemyunits->bomber[i]->getcomponent<transposecomponent>();
-		std::shared_ptr<healthcomponent> enemyhealth = enemyunits->bomber[i]->getcomponent<healthcomponent>();
-		std::shared_ptr<AIcomp> enemyai = enemyunits->bomber[i]->getcomponent<AIcomp>();
-
-		distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
-		distancescore = setclamp(linearandquadratic(0.0f, distancescore, 0.8), 0.2, 1);
-
-		healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
-		healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.5, 1);
-
-		glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
-		float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
-		float degreecheck = glm::degrees(shotdegrees);
-
-		anglescore = invert(degreecheck / 180.0f, 1);
-		anglescore = setclamp(logisticscore(2, anglescore, 0.6, -10), 0.3, 1);
-
-		float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore);
-
-
-		if (enemyai->myaction != NULL)
+		if (enemyunits->allunits[i]->returntype() == enttypes::Bomber || enemyunits->allunits[i]->returntype() == enttypes::Player || enemyunits->allunits[i]->returntype() == enttypes::Fighter)
 		{
-			if (enemyai->myaction->returntype() == "fleeaction" || enemyai->myaction->returntype() == "manaction")
+			std::shared_ptr<transposecomponent> enemytrans = enemyunits->allunits[i]->getcomponent<transposecomponent>();
+			std::shared_ptr<healthcomponent> enemyhealth = enemyunits->allunits[i]->getcomponent<healthcomponent>();
+			std::shared_ptr<AIcomp> enemyai = enemyunits->allunits[i]->getcomponent<AIcomp>();
+
+			distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
+			distancescore = setclamp(linearandquadratic(0.0f, distancescore, 0.8), 0.2, 1);
+
+			healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
+			healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.5, 1);
+
+			glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
+			float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
+			float degreecheck = glm::degrees(shotdegrees);
+
+			anglescore = invert(degreecheck / 180.0f, 1);
+			anglescore = setclamp(logisticscore(2, anglescore, 0.6, -10), 0.3, 1);
+
+			float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore);
+
+			if (enemyai && enemyai->myaction)
 			{
-				newscore = newscore * 0.6f;
+				if (enemyai->myaction->returntype() == "fleeaction" || enemyai->myaction->returntype() == "manaction")
+				{
+					std::shared_ptr<numtargetedby> enemytargetnum = enemyunits->allunits[i]->getcomponent<numtargetedby>();
+					float invertNorm = invert(enemytargetnum->numTargetingMe / 3.0f, 1);
+					float targetnumscore = setclamp(logisticscore(2,invertNorm,-10,0.4),0.2,1);
+					newscore = scoringfixer(newscore, targetnumscore);
+				}
 			}
-		}
 
-		if (newscore > bestscore)
-		{
-			besttarget = enemyunits->bomber[i];
-			bestscore = newscore;
-		}
-	}
-	for (int i = 0; i < enemyunits->fighters.size(); i++)
-	{
-		std::shared_ptr<transposecomponent> enemytrans = enemyunits->fighters[i]->getcomponent<transposecomponent>();
-		std::shared_ptr<healthcomponent> enemyhealth = enemyunits->fighters[i]->getcomponent<healthcomponent>();
-		std::shared_ptr<AIcomp> enemyai = enemyunits->fighters[i]->getcomponent<AIcomp>();
-
-		distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
-		distancescore = setclamp(linearandquadratic(0.0f, distancescore, 0.8), 0.2, 1);
-
-		healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
-		healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.4, 1);
-
-		glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
-		float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
-		float degreecheck = glm::degrees(shotdegrees);
-
-		anglescore = invert(degreecheck / 180.0f, 1);
-		anglescore = setclamp(logisticscore(2, anglescore, 0.6, -10), 0.2, 1);
-
-		float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore);
-
-		if (enemyai->myaction != NULL)
-		{
-			if (enemyai->myaction->returntype() == "fleeaction" || enemyai->myaction->returntype() == "manaction")
+			if (newscore > bestscore && enemyunits->allunits[i]->returntype() == enttypes::Player)
 			{
-				newscore = newscore * 0.6f;
-			}
-		}
-
-		if (newscore > bestscore)
-		{
-			besttarget = enemyunits->fighters[i];
-			bestscore = newscore;
-		}
-
-	}
-	if (enemyunits->player != NULL)
-	{
-		std::shared_ptr<transposecomponent> enemytrans = enemyunits->player->getcomponent<transposecomponent>();
-		std::shared_ptr<healthcomponent> enemyhealth = enemyunits->player->getcomponent<healthcomponent>();
-
-		distancescore = invert(std::fmin(glm::length(mytrans->position - enemytrans->position), 1000) / 1000, 1);
-		distancescore = setclamp(linearandquadratic(0.0f, distancescore, 0.8), 0.2, 1);
-
-		healthscore = invert(enemyhealth->health / enemyhealth->maxhp, 1);
-		healthscore = setclamp(linearandquadratic(0.0f, healthscore, 0.5), 0.5, 1);
-
-		glm::vec3 norm = glm::normalize((enemytrans->position - mytrans->position));
-		float shotdegrees = acos(glm::dot(mydir->newdirect, norm));
-		float degreecheck = glm::degrees(shotdegrees);
-
-		anglescore = invert(degreecheck / 180.0f, 1);
-		anglescore = setclamp(logisticscore(2, anglescore, 0.6, -10), 0.3, 1);
-
-		float newscore = scoringfixer(scoringfixer(healthscore, distancescore), anglescore);
-
-		if (newscore > bestscore)
-		{
-			besttarget = enemyunits->player;
-			bestscore = newscore;
-
-			std::shared_ptr<directioncomponent> playerdir = besttarget->getcomponent<directioncomponent>();
-			std::shared_ptr<healthcomponent> aihealth = me->getcomponent<healthcomponent>();
-
-			glm::vec3 pnorm = glm::normalize((mytrans->position - enemytrans->position));
-			float pshotdegrees = acos(glm::dot(playerdir->newdirect, pnorm));
-			float pdegreecheck = glm::degrees(pshotdegrees);
-			float panglescore = invert(pdegreecheck / 180.0f, 1);
-			panglescore = setclamp(logisticscore(2, panglescore, 0.6, -10), 0.3, 1);
-
-			float phealthscore = invert(aihealth->health / aihealth->maxhp, 1);
-			phealthscore = setclamp(linearandquadratic(0.0f, phealthscore, 0.5), 0.5, 1);
-			float playerscore = scoringfixer(scoringfixer(phealthscore, distancescore), panglescore);
-
-			if (playerscore > bestscore)
-			{
+				besttarget = enemyunits->player;
 				bestscore = newscore;
-				manaction newaction;
-				newaction.setflee(besttarget);
-				newaction.settime(touse.fulltime);
-				newaction.addme(me);
-				newaction.setman(touse);
-				newaction.start();
-				myaicomp->myaction = std::make_unique<manaction>(newaction);
-				return;
-			}
 
+				std::shared_ptr<directioncomponent> playerdir = besttarget->getcomponent<directioncomponent>();
+				std::shared_ptr<healthcomponent> aihealth = me->getcomponent<healthcomponent>();
+
+				glm::vec3 pnorm = glm::normalize((mytrans->position - enemytrans->position));
+				float pshotdegrees = acos(glm::dot(playerdir->newdirect, pnorm));
+				float pdegreecheck = glm::degrees(pshotdegrees);
+				float panglescore = invert(pdegreecheck / 180.0f, 1);
+				panglescore = setclamp(logisticscore(2, panglescore, 0.6, -10), 0.3, 1);
+
+				float phealthscore = invert(aihealth->health / aihealth->maxhp, 1);
+				phealthscore = setclamp(linearandquadratic(0.0f, phealthscore, 0.5), 0.5, 1);
+				float playerscore = scoringfixer(scoringfixer(phealthscore, distancescore), panglescore);
+
+				if (playerscore > bestscore)
+				{
+					bestscore = newscore;
+					manaction newaction;
+					newaction.setflee(besttarget);
+					newaction.settime(touse.fulltime);
+					newaction.addme(me);
+					newaction.setman(touse);
+					newaction.start();
+					myaicomp->myaction = std::make_unique<manaction>(newaction);
+					return;
+				}
+			}
+			else if (newscore > bestscore)
+			{
+				besttarget = enemyunits->allunits[i];
+				bestscore = newscore;
+			}
 		}
 	}
-
 	if (myaicomp->score < bestscore)
 	{
 		myaicomp->score = bestscore;
@@ -321,6 +264,12 @@ void attackflyer(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits> ene
 		{
 			if (enemyaicomp->score < bestscore)
 			{
+				if (enemyaicomp->myaction)
+				{
+					enemyaicomp->myaction->end();
+				}
+				std::shared_ptr<numtargetedby> enemytargetnum = besttarget->getcomponent<numtargetedby>();
+				enemytargetnum->numTargetingMe++;
 				enemyaicomp->score = bestscore;
 				int i = rand() % 2;
 				if (i == 0)

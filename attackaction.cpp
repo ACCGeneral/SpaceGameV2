@@ -128,4 +128,11 @@ void attackaction::end()
 {
 	myphyscomp = me->getcomponent<physics>();
 	myphyscomp->maxspeed = orgmaxvel;
+	if (mytarget)
+	{
+		std::shared_ptr<numtargetedby> targetsTrackNum = mytarget->getcomponent<numtargetedby>();
+		targetsTrackNum->numTargetingMe--;
+	}
+
+
 }

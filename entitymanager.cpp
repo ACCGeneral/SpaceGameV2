@@ -195,6 +195,9 @@ void entitymanager::createplayer(glm::vec3 pos)
 	MT->target = NULL;
 	player->addcomponent(MT);
 
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	player->addcomponent(targettingme);
+
 	entities[player->returnID()] = player;
 	tooadd.push_back(player);
 
@@ -302,6 +305,9 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
 	enemyfighter->addcomponent(iown);
 
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	enemyfighter->addcomponent(targettingme);
+
 	entities[enemyfighter->returnID()] = enemyfighter;
 	tooadd.push_back(enemyfighter);
 
@@ -406,6 +412,9 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
 	enemeybomber->addcomponent(iown);
 
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	enemeybomber->addcomponent(targettingme);
+
 	entities[enemeybomber->returnID()] = enemeybomber;
 	tooadd.push_back(enemeybomber);
 
@@ -493,6 +502,9 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
 	EnemyCapital->addcomponent(iown);
+
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	EnemyCapital->addcomponent(targettingme);
 
 	entities[EnemyCapital->returnID()] = EnemyCapital;
 	tooadd.push_back(EnemyCapital);
@@ -609,6 +621,9 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
 	AllyFighter->addcomponent(iown);
 
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	AllyFighter->addcomponent(targettingme);
+
 	entities[AllyFighter->returnID()] = AllyFighter;
 	tooadd.push_back(AllyFighter);
 
@@ -713,6 +728,9 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
 	allybomber->addcomponent(iown);
 
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	allybomber->addcomponent(targettingme);
+
 	entities[allybomber->returnID()] = allybomber;
 	tooadd.push_back(allybomber);
 
@@ -800,6 +818,9 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 
 	std::shared_ptr<thingsiown> iown = std::make_shared<thingsiown>();
 	AllyCapital->addcomponent(iown);
+
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	AllyCapital->addcomponent(targettingme);
 
 	entities[AllyCapital->returnID()] = AllyCapital;
 	tooadd.push_back(AllyCapital);
@@ -930,6 +951,9 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	AI->MovCon.setme(turretEntity);
 	AI->MovCon.setsepsphere(collision->mysphere->rad * 1.5);
 	turretEntity->addcomponent(AI);
+
+	std::shared_ptr<numtargetedby> targettingme = std::make_shared<numtargetedby>();
+	turretEntity->addcomponent(targettingme);
 
 	entities[turretEntity->returnID()] = turretEntity;
 	tooadd.push_back(turretEntity);

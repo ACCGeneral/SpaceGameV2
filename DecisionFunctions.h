@@ -4,8 +4,6 @@
 #include "Teamunits.h"
 #include "manaction.h"
 
-
-
 void toenemycap(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits> enemyunits, float maxdistance);
 
 void bombingrun(std::shared_ptr<ACC::entity> me, std::shared_ptr<teamunits> enemyunits, maneuver touse, maneuver startuse);

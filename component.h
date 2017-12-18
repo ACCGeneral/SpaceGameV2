@@ -545,3 +545,18 @@ public:
 
 };
 
+class numtargetedby : public ACC::component
+{
+
+public:
+
+	int numTargetingMe;
+	static const int TypeID = 28;
+
+	int GetType() const { return TypeID; };
+	numtargetedby()
+	{
+		numTargetingMe = 0;
+	}
+};
+

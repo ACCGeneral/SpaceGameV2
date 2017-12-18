@@ -19,11 +19,14 @@ private:
 
 	std::vector<std::pair<maneuver, std::string>> mymaneuver;
 
+	std::vector<std::pair<maneuver, std::string>> bombermaneuvers;
+
 public:
 
 	maneuvers();
 
 	maneuver getrandom();
+	maneuver getrandombomber();
 	maneuver getcurtain(std::string man);
 	void addman(std::vector<glm::vec3> pos, std::vector<float> r, std::vector<float> t, std::string name);
 

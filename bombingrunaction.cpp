@@ -44,7 +44,7 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 	if (man == false)
 	{
 
-		if (targetdistance < (mycol->mysphere->rad * 2.5))
+		if (targetdistance < (enemycol->mysphere->rad * 2.5))
 		{
 			man = true;
 			for (int i = 0; i < myman.manpos.size(); i++)
@@ -109,7 +109,7 @@ void bombingrunaction::run(float dt, std::shared_ptr<world> myworld)
 
 	float t;
 
-	if (enemycol->mysphere->raycollision(newray, t) && targetdistance < 600)
+	if (enemycol->mysphere->raycollision(newray, t) && targetdistance < 900)
 	{
 		if (myguns->currettime >= myguns->firetime)
 		{
