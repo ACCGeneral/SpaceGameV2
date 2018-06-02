@@ -80,7 +80,7 @@ void MainGame::init()
 
 
 	updateEnts();
-	myworld->getmaincam()->setProjection(glm::perspective(glm::radians(52.0f), (float)1280.0f / (float)720.0f, 0.1f, 10000.0f));
+	myworld->getmaincam()->setProjection(glm::perspective(glm::radians(52.0f), (float)1920.0f / (float)1080.0f, 0.1f, 10000.0f));
 
 	std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
 	newsound->mysound = Resourecmanager::instance().getsound("MainMusic");
@@ -124,8 +124,8 @@ void MainGame::draw(float dt)
 		int allyper = (allycapship->health / allycapship->maxhp) * 100;
 		int enemyper = (enemycapship->health / enemycapship->maxhp) * 100;
 
-		TextManager::instance().rendertext(std::to_string(enemyper) + "%", glm::vec3(1.0f, 1.0f, 1.0f), 1155.0f, 50.0f, 0.4f);
-		TextManager::instance().rendertext(std::to_string(allyper) + "%", glm::vec3(1.0, 1.0, 1.0), 85.0f, 50.0f, 0.4f);
+		TextManager::instance().rendertext(std::to_string(enemyper) + "%", glm::vec3(1.0f, 1.0f, 1.0f), 1740.0f, 50.0f, 0.4f);
+		TextManager::instance().rendertext(std::to_string(allyper) + "%", glm::vec3(1.0, 1.0, 1.0), 130.0f, 50.0f, 0.4f);
 	}
 
 	myspawnsystem.addrespawndata(myworld->returnmanager()->returntodelete());

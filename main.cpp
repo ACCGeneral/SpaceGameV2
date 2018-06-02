@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 	std::shared_ptr<ACC::engine> myengine = std::make_shared<ACC::engine>(); //create engine instance 
 
-	bool setupcheck = myengine->OpenglSdlSetup(1280, 720);
+	bool setupcheck = myengine->OpenglSdlSetup(1920, 1080);
 
 	if (setupcheck == false)
 	{

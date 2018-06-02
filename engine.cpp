@@ -24,9 +24,9 @@ bool ACC::engine::OpenglSdlSetup(int width, int height) //set up all of the SDL 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	window = SDL_CreateWindow("ACC Engine",  // The first parameter is the window title
-		100, 100,
+		0, 0,
 		width, height,
-		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_RENDERER_ACCELERATED);
+		SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_OPENGL | SDL_RENDERER_ACCELERATED);
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	glcontext = SDL_GL_CreateContext(window);
@@ -112,7 +112,7 @@ void ACC::engine::update()
 	frametimelast = current;
 	framespersecond = (float)(1000.f / framespersecond);
 	std::string fpstext = "FPS " + std::to_string(framespersecond);
-	TextManager::instance().rendertext(fpstext, glm::vec3(1.0f, 0.0, 0.0), 1, 700.0f, 0.5f);
+	TextManager::instance().rendertext(fpstext, glm::vec3(1.0f, 0.0, 0.0), 1, 1050.0f, 0.5f);
 
 	if (go == false && sceneMan != NULL) // if we want to shut down
 	{
