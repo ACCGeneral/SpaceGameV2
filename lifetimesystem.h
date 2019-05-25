@@ -9,6 +9,7 @@ class lifetimesystem : public ACC::System
 private:
 
 	std::vector<std::shared_ptr<ACC::entity>> lifeents;
+	OctTree* root;
 
 public:
 

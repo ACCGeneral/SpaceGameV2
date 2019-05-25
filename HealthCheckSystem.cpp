@@ -4,6 +4,7 @@
 HealthCheckSystem::HealthCheckSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "HealthCheckSystem";
+	root = myworld->returnoct();
 }
 
 void HealthCheckSystem::damageevents()
@@ -70,6 +71,8 @@ void HealthCheckSystem::update(float & dt, bool & go)
 		if (healthobjects->health <= 0 && !num->returndeleteme())
 		{
 			myworld->returnmanager()->addtodeletelist(num);
+			bool removefrom = false;
+			root->removethis(num->returnID(), removefrom);
 
 			if (healthobjects->deathsound.second)
 			{
@@ -94,7 +97,6 @@ void HealthCheckSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 {
 	std::vector<std::shared_ptr<ACC::entity>> ents = ent;
 
-	std::cout << ents.size() << '\n';
 
 	for (int i = 0; i < healthobjects.size(); i++)
 	{

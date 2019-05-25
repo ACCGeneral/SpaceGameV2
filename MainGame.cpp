@@ -92,8 +92,6 @@ void MainGame::init()
 
 void MainGame::update(float dt, bool & go)
 {
-	std::cout << "new frame \n";
-
 	myspawnsystem.createents(myworld->returnmanager());
 
 	float tempdt = dt;

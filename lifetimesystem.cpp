@@ -4,7 +4,7 @@
 lifetimesystem::lifetimesystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "lifetimesystem";
-
+	root = myworld->returnoct();
 }
 
 void lifetimesystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
@@ -32,6 +32,8 @@ void lifetimesystem::update(float & dt, bool & go)
 		if (entslifespan->lifetime <= 0 && !ent->returndeleteme())
 		{
 			myworld->returnmanager()->addtodeletelist(ent);
+			bool removefrom = false;
+			root->removethis(ent->returnID(), removefrom);
 		}
 	}
 }

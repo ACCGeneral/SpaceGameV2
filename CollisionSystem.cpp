@@ -71,8 +71,6 @@ void CollisionSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 		{
 			if (collisionEnts[i] == ents[j])
 			{
-				bool removefrom = false;
-				root->removethis(ents[j]->returnID(), removefrom);
 				collisionEnts.erase(collisionEnts.begin() + i);
 				ents.erase(ents.begin() + j);
 				j--;

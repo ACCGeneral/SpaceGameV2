@@ -9,6 +9,7 @@ class HealthCheckSystem : public ACC::System
 private:
 
 	std::vector<std::shared_ptr<ACC::entity>> healthobjects;
+	OctTree* root;
 
 public:
 
