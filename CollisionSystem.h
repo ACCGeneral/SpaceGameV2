@@ -10,6 +10,7 @@ class CollisionSystem : public ACC::System
 private:
 
 	std::vector<std::shared_ptr<ACC::entity>> collisionEnts;
+	OctTree* root;
 
 public:
 

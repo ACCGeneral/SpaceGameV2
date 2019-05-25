@@ -18,9 +18,9 @@ void HealthCheckSystem::damageevents()
 			std::shared_ptr<ACC::entity> healthent = myworld->returnmanager()->getentfromid(newhealthevent->takingdamageID);
 			std::shared_ptr<healthcomponent> healthE = healthent->getcomponent<healthcomponent>();
 
-			if (healthE->hitdelete.first == true)
+			if (healthE->hitdelete == true)
 			{
-				healthE->hitdelete.second = true;
+				healthE->health = -1;
 			}
 			else if (newhealthevent->damagedealerID != -1)
 			{
@@ -60,7 +60,6 @@ void HealthCheckSystem::update(float & dt, bool & go)
 {
 	damageevents();
 
-	OctTree *root = myworld->returnoct();
 	bool removefrom = false;
 
 	for (auto num : healthobjects)
@@ -68,10 +67,9 @@ void HealthCheckSystem::update(float & dt, bool & go)
 		std::shared_ptr<healthcomponent> healthobjects = num->getcomponent<healthcomponent>();
 		removefrom = false;
 
-		if (healthobjects->health <= 0 || healthobjects->hitdelete.second == true)
+		if (healthobjects->health <= 0 && !num->returndeleteme())
 		{
 			myworld->returnmanager()->addtodeletelist(num);
-			root->removethis(num->returnID(), removefrom);
 
 			if (healthobjects->deathsound.second)
 			{
@@ -94,8 +92,9 @@ void HealthCheckSystem::update(float & dt, bool & go)
 
 void HealthCheckSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 {
-
 	std::vector<std::shared_ptr<ACC::entity>> ents = ent;
+
+	std::cout << ents.size() << '\n';
 
 	for (int i = 0; i < healthobjects.size(); i++)
 	{

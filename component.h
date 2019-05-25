@@ -117,6 +117,9 @@ public:
 
 	healthcomponent()
 	{
+		health = 0;
+		maxhp = 0;
+		hitdelete = false;
 		deathsound.second = false;
 		explotionondeath = false;
 	}
@@ -125,7 +128,7 @@ public:
 
 	float health;
 	float maxhp;
-	std::pair<bool, bool> hitdelete;
+	bool hitdelete;
 	std::pair<sound,bool> deathsound;
 	bool explotionondeath;
 

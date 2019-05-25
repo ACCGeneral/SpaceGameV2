@@ -82,16 +82,18 @@ void MainGame::init()
 	updateEnts();
 	myworld->getmaincam()->setProjection(glm::perspective(glm::radians(52.0f), (float)1920.0f / (float)1080.0f, 0.1f, 10000.0f));
 
-	std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
-	newsound->mysound = Resourecmanager::instance().getsound("MainMusic");
-	newsound->mytype = newsound->repeate;
-	newsound->position = glm::vec3(0, 0, 0);
-	myworld->returnmanager()->createsound(newsound);
+	//std::shared_ptr<soundComponet> newsound = std::make_shared<soundComponet>();
+	//newsound->mysound = Resourecmanager::instance().getsound("MainMusic");
+	//newsound->mytype = newsound->repeate;
+	//newsound->position = glm::vec3(0, 0, 0);
+	//myworld->returnmanager()->createsound(newsound);
 
 }
 
 void MainGame::update(float dt, bool & go)
 {
+	std::cout << "new frame \n";
+
 	myspawnsystem.createents(myworld->returnmanager());
 
 	float tempdt = dt;
@@ -129,8 +131,8 @@ void MainGame::draw(float dt)
 	}
 
 	myspawnsystem.addrespawndata(myworld->returnmanager()->returntodelete());
-
 	destroyEnts();
+
 	myworld->returnmanager()->cleartodelete();
 }
 
@@ -146,7 +148,6 @@ void MainGame::exit()
 		myupdatesystems.erase(myupdatesystems.begin() + i);
 		i--;
 	}
-
 
 }
 

@@ -26,7 +26,7 @@ bool ACC::engine::OpenglSdlSetup(int width, int height) //set up all of the SDL 
 	window = SDL_CreateWindow("ACC Engine",  // The first parameter is the window title
 		0, 0,
 		width, height,
-		SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_OPENGL | SDL_RENDERER_ACCELERATED);
+		SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_RENDERER_ACCELERATED);
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	glcontext = SDL_GL_CreateContext(window);

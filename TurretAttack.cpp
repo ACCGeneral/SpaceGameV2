@@ -87,9 +87,6 @@ void TurretAttack::run(float dt, std::shared_ptr<world> myworld)
 	mydir->newdirect = mytrans->myquat * mydir->direction;
 
 	time -= dt;
-
-
-
 }
 
 void TurretAttack::end()

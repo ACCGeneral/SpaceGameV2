@@ -21,7 +21,6 @@ void lifetimesystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 
 void lifetimesystem::update(float & dt, bool & go)
 {
-	OctTree *root = myworld->returnoct();
 	bool removefrom = false;
 
 	for (auto ent : lifeents)
@@ -30,14 +29,11 @@ void lifetimesystem::update(float & dt, bool & go)
 		std::shared_ptr<lifespan> entslifespan = ent->getcomponent<lifespan>();
 		entslifespan->lifetime -= dt;
 
-		if (entslifespan->lifetime <= 0 && ent->returndeleteme() == false)
+		if (entslifespan->lifetime <= 0 && !ent->returndeleteme())
 		{
 			myworld->returnmanager()->addtodeletelist(ent);
-			root->removethis(ent->returnID(), removefrom);
 		}
 	}
-
-	root = NULL;
 }
 
 void lifetimesystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)

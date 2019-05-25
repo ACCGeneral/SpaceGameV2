@@ -13,8 +13,8 @@ float invert(float num, float max)
 
 float clamp(float num)
 {
-	float clampnum = std::fmin(1, num);
-	clampnum = std::fmax(0, clampnum);
+	float clampnum = std::fmin(1.0f, num);
+	clampnum = std::fmax(0.0f, clampnum);
 
 	return clampnum;
 }

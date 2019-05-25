@@ -125,11 +125,11 @@ void PlayerSystem::update(float & dt, bool & go)
 
 	if (inputlogger::instance().getkeydown(SDLK_w) && playerphysics->speed < playerphysics->maxspeed)
 	{
-		playerphysics->speed += 0.2;
+		playerphysics->speed += 0.2f;
 	}
 	if (inputlogger::instance().getkeydown(SDLK_s) && playerphysics->speed > 0)
 	{
-		playerphysics->speed -= 0.2;
+		playerphysics->speed -= 0.2f;
 	}
 
 	playerphysics->velocity += (playerdir->newdirect * playerphysics->speed);

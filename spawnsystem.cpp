@@ -107,6 +107,7 @@ void spawnsystem::addrespawndata(std::vector<std::shared_ptr<ACC::entity>> deade
 			newspawn.countdown = 5;
 			newspawn.type = "player";
 			myspawndata.push_back(newspawn);
+			std::cout << "player had died adding entry to create new one \n";
 		}
 		else if (ent->returntype() == enttypes::Fighter)
 		{

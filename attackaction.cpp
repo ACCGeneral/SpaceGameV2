@@ -117,7 +117,7 @@ void attackaction::run(float dt, std::shared_ptr<world> myworld)
 	}
 
 	glm::quat newrotation = glm::toQuat(lookatmatrix);
-	float angleofRot = glm::clamp(2.0f * dt, 0.0f, 1.0f);
+	float angleofRot = glm::clamp(4.0f * dt, 0.0f, 1.0f);
 	mytrans->myquat = glm::slerp(mytrans->myquat, newrotation, angleofRot);
 	mydir->newdirect = mytrans->myquat * mydir->direction;
 

@@ -133,8 +133,7 @@ void entitymanager::createplayer(glm::vec3 pos)
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 100;
 	health->maxhp = 100;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -237,8 +236,7 @@ void entitymanager::createEnemyFighter(glm::vec3 pos)
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 100;
 	health->maxhp = 100;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -345,8 +343,7 @@ void entitymanager::createEnemyBomber(glm::vec3 pos)
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 150;
 	health->maxhp = 150;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -474,8 +471,7 @@ std::shared_ptr<healthcomponent> entitymanager::createEnemyCapital(glm::vec3 pos
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 10000;
 	health->maxhp = 10000;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -553,8 +549,7 @@ void entitymanager::createAllyFighter(glm::vec3 pos)
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 100;
 	health->maxhp = 100;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -661,8 +656,7 @@ void entitymanager::createAllyBomber(glm::vec3 pos)
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 150;
 	health->maxhp = 150;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -790,8 +784,7 @@ std::shared_ptr<healthcomponent> entitymanager::createAllyCapital(glm::vec3 pos)
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 10000;
 	health->maxhp = 10000;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -882,8 +875,7 @@ void entitymanager::createCapTurret(std::shared_ptr<ACC::entity> mycap, bool tea
 	std::shared_ptr<healthcomponent> health = std::make_shared<healthcomponent>();
 	health->health = 500;
 	health->maxhp = 500;
-	health->hitdelete.first = false;
-	health->hitdelete.second = false;
+	health->hitdelete = false;
 	health->deathsound.first = Resourecmanager::instance().getsound("explosion");
 	health->deathsound.second = true;
 	health->explotionondeath = true;
@@ -1125,8 +1117,7 @@ void entitymanager::createbullet(projectileinfo info)
 
 	std::shared_ptr<healthcomponent> hp = std::make_shared<healthcomponent>();
 	hp->health = hp->maxhp = 1;
-	hp->hitdelete.first = true;
-	hp->hitdelete.second = false;
+	hp->hitdelete = true;
 	bullet->addcomponent(hp);
 
 	std::shared_ptr<physics> speedcomp = std::make_shared<physics>();
@@ -1205,8 +1196,7 @@ void entitymanager::createbomb(projectileinfo info)
 
 	std::shared_ptr<healthcomponent> hp = std::make_shared<healthcomponent>();
 	hp->health = hp->maxhp = 1;
-	hp->hitdelete.first = true;
-	hp->hitdelete.second = false;
+	hp->hitdelete = true;
 	bomb->addcomponent(hp);
 
 	std::shared_ptr<physics> speedcomp = std::make_shared<physics>();
@@ -1469,11 +1459,6 @@ void entitymanager::cleartodelete() //delete all entities we no longer need
 {
 	for (int i = 0; i < todelete.size(); i++)
 	{
-		std::unordered_map<unsigned long int, std::shared_ptr<ACC::entity>>::const_iterator got = entities.find(todelete[i]->returnID());
-		if (got != entities.end())
-		{
-			entities[todelete[i]->returnID()]->setdeleteme();
-		}
 		entities.erase(todelete[i]->returnID());
 		todelete.erase(todelete.begin() + i);
 		i--;

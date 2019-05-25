@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
 		myengine->update();
 	}
 
-
 	myengine->cleanup(); //final cleanup
 	
 

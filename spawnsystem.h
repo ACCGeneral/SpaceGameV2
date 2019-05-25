@@ -3,6 +3,7 @@
 #include <vector>
 #include <glm.hpp>
 #include <memory>
+#include <string>
 
 class entitymanager;
 

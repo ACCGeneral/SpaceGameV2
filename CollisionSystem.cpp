@@ -5,12 +5,11 @@
 CollisionSystem::CollisionSystem(std::shared_ptr<world> w, std::shared_ptr<EventSystem> EventSys) : System(w, EventSys)
 {
 	my_System_Name = "CollisionSystem";
-
+	root = myworld->returnoct();
 }
 
 void CollisionSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 {
-	OctTree *root = myworld->returnoct();
 	std::vector<unsigned long int> lookfor;
 	lookfor.push_back(transposecomponent::TypeID);
 	lookfor.push_back(collisioncomp::TypeID);
@@ -37,8 +36,6 @@ void CollisionSystem::soiwant(std::vector<std::shared_ptr<ACC::entity>> ent)
 
 void CollisionSystem::update(float & dt, bool & go)
 {
-	bool removefrom = false;
-	OctTree *root = myworld->returnoct();
 
 	for (int i = 0; i < collisionEnts.size(); i++)
 	{
@@ -54,15 +51,12 @@ void CollisionSystem::update(float & dt, bool & go)
 			entcoldata->myobb[i]->update(posent1, enttrans->myquat);
 		}
 
-		removefrom = false;
 		if (enttrans->position.x > 4000 || enttrans->position.y > 4000 || enttrans->position.z > 4000 || enttrans->position.x < -4000 || enttrans->position.y < -4000 || enttrans->position.z < -4000)
 		{
 			myworld->returnmanager()->addtodeletelist(collisionEnts[i]);
-			root->removethis(collisionEnts[i]->returnID(), removefrom);
 		}
 	}
 	root->update();
-	root = NULL;
 
 }
 
@@ -77,6 +71,8 @@ void CollisionSystem::doihave(std::vector<std::shared_ptr<ACC::entity>> ent)
 		{
 			if (collisionEnts[i] == ents[j])
 			{
+				bool removefrom = false;
+				root->removethis(ents[j]->returnID(), removefrom);
 				collisionEnts.erase(collisionEnts.begin() + i);
 				ents.erase(ents.begin() + j);
 				j--;

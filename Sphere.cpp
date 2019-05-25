@@ -13,7 +13,7 @@ sphere::sphere(glm::vec3 min, glm::vec3 max)
 	maxrad = std::fmax(std::fmax((max.y - center.y), center.y - min.y),maxrad);
 	maxrad = std::fmax(std::fmax((max.z - center.z), center.z - min.z), maxrad);
 
-	rad = maxrad * 1.2;
+	rad = maxrad * 1.2f;
 }
 
 void sphere::update(glm::vec3 pos)
@@ -35,16 +35,16 @@ bool sphere::raycollision(Ray testray, float &t)
 
 	float deter = b*b - c;
 
-	if (deter < 0.0)
+	if (deter < 0.0f)
 	{
 		return false;
 	}
 
 	t = -b - glm::sqrt(deter);
 
-	if (t < 0.0)
+	if (t < 0.0f)
 	{
-		t = 0;
+		t = 0.0f;
 	}
 
 
